@@ -1,4 +1,6 @@
 import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { PlayIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 
 export default function Home() {
@@ -16,8 +18,12 @@ export default function Home() {
           criar suas próprias listas de observação, para encontrar facilmente o
           conteúdo que deseja assistir.
         </p>
-        <Link href='/' className={buttonVariants({ variant: 'default' })}>
-          Comece a Assistir Agora
+        <Link
+          href='/'
+          className={cn('-space-x-1', buttonVariants({ variant: 'default' }))}
+        >
+          <PlayIcon className='size-6' />
+          <span>Comece a Assistir Agora</span>
         </Link>
       </header>
     </main>
