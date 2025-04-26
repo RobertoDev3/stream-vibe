@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import { Nav } from '@/components/layout/nav';
 
 export const metadata: Metadata = {
   title: 'Stream Vibe',
@@ -14,6 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='pt-BR'>
+      <Nav />
       <body>{children}</body>
     </html>
   );
