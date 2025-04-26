@@ -23,7 +23,7 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <div className='absolute left-1/2 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 md:px-20 xl:px-[162px]'>
+    <div className='absolute left-1/2 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 md:px-20 2xl:px-0'>
       <Logo />
 
       <nav className='my-4 rounded-lg border-3 border-[var(--black12)] bg-[var(--black06)]'>
@@ -45,7 +45,7 @@ export function Nav() {
       </nav>
 
       <div className='flex items-center gap-4'>
-        <Button variant='ghost' size='icon'>
+        <Button variant='ghost' size='icon' title='Pesquisar'>
           <MagnifyingGlassIcon className='size-6' />
         </Button>
         <Button variant='secondary'>Entrar</Button>
