@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import { Nav } from '@/components/layout/nav';
 import { Manrope } from 'next/font/google';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Stream Vibe',
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='pt-BR' suppressHydrationWarning>
-      <body className={manrope.className}>
+      <body className={cn('bg-[var(--black08)] text-white', manrope.className)}>
         <Nav />
         {children}
       </body>
