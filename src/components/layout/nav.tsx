@@ -1,8 +1,11 @@
 'use client';
 
+import { Logo } from '@/assets/logo';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Button } from '../ui/button';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 type NavItem = {
   name: string;
@@ -21,7 +24,7 @@ export function Nav() {
 
   return (
     <div className='absolute left-1/2 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 md:px-20 xl:px-[162px]'>
-      <p>logo</p>
+      <Logo />
 
       <nav className='my-4 rounded-lg border-3 border-[var(--black12)] bg-[var(--black06)]'>
         <ul className='flex h-full items-center gap-4 px-4 py-2'>
@@ -41,8 +44,11 @@ export function Nav() {
         </ul>
       </nav>
 
-      <div>
-        <p>icons</p>
+      <div className='flex items-center gap-4'>
+        <Button variant='ghost' size='icon'>
+          <MagnifyingGlassIcon className='size-6' />
+        </Button>
+        <Button variant='secondary'>Entrar</Button>
       </div>
     </div>
   );
