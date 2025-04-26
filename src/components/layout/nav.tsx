@@ -6,7 +6,7 @@ export function Nav() {
       <p>logo</p>
 
       <nav>
-        <ul className='flex gap-4'>
+        <ul className='flex gap-4 bg-black stroke-white stroke-2 p-2 text-white'>
           <li>
             <Link href='/'>Home</Link>
           </li>
