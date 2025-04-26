@@ -1,6 +1,6 @@
 export default function Support() {
   return (
-    <main className='flex h-dvh items-center justify-center bg-gray-200'>
+    <main className='flex h-dvh items-center justify-center'>
       <div>página Suporte</div>
     </main>
   );
