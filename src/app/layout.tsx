@@ -20,9 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='pt-BR'>
-      <Nav />
-      <body className={manrope.className}>{children}</body>
+    <html lang='pt-BR' suppressHydrationWarning>
+      <body className={manrope.className}>
+        <Nav />
+        {children}
+      </body>
     </html>
   );
 }
