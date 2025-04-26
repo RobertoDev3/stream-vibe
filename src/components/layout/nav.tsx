@@ -20,7 +20,7 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <div className='absolute top-0 left-0 mx-auto flex w-full max-w-7xl items-center justify-between bg-red-300 px-20'>
+    <div className='absolute top-0 left-0 mx-auto flex w-full max-w-7xl items-center justify-between px-20'>
       <p>logo</p>
 
       <nav className='my-4 rounded-lg border-3 border-[var(--black12)] bg-[var(--black06)]'>
