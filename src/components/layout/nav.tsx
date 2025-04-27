@@ -5,7 +5,17 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '../ui/sheet';
+import { SearchInput } from '../common/search-input';
 
 type NavItem = {
   name: string;
@@ -23,35 +33,86 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <div className='absolute left-1/2 z-20 hidden w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 sm:flex md:px-20 2xl:px-0'>
-      <Link href='/'>
-        <Logo />
-      </Link>
+    <section>
+      {/* Desktop Nav */}
+      <div className='absolute left-1/2 z-20 my-4 hidden w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 md:px-20 lg:flex 2xl:px-0'>
+        <Link href='/'>
+          <Logo />
+        </Link>
 
-      <nav className='my-4 rounded-lg border-3 border-[var(--black12)] bg-[var(--black06)]'>
-        <ul className='flex h-full items-center gap-4 px-4 py-2'>
-          {navItems.map(({ name, path }, key) => (
-            <li
-              key={key}
-              className={cn(
-                'py-3 text-sm text-[var(--grey75)] transition-all',
-                'hover:rounded-md hover:bg-[var(--black10)] hover:px-5 hover:font-medium hover:text-white',
-                pathname === path &&
-                  'rounded-md bg-[var(--black10)] px-5 py-3 font-medium text-white',
-              )}
-            >
-              <Link href={path}>{name}</Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+        <nav className='rounded-lg border-3 border-[var(--black12)] bg-[var(--black06)]'>
+          <ul className='flex h-full items-center gap-4 px-4 py-2'>
+            {navItems.map(({ name, path }, key) => (
+              <li
+                key={key}
+                className={cn(
+                  'py-3 text-sm text-[var(--grey75)] transition-all',
+                  'hover:rounded-md hover:bg-[var(--black10)] hover:px-5 hover:font-medium hover:text-white',
+                  pathname === path &&
+                    'rounded-md bg-[var(--black10)] px-5 py-3 font-medium text-white',
+                )}
+              >
+                <Link href={path}>{name}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      <div className='flex items-center gap-4'>
-        <Button variant='ghost' size='icon' title='Pesquisar'>
-          <MagnifyingGlassIcon className='size-6' />
-        </Button>
-        <Button variant='secondary'>Entrar</Button>
+        <div className='flex items-center gap-4'>
+          <Button variant='ghost' size='icon' title='Pesquisar'>
+            <MagnifyingGlassIcon className='size-6' />
+          </Button>
+          <Button variant='secondary'>Entrar</Button>
+        </div>
       </div>
-    </div>
+
+      {/* Mobile Nav */}
+      <div className='absolute left-1/2 z-20 my-4 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 md:px-20 lg:hidden 2xl:px-0'>
+        <Link href='/'>
+          <Logo />
+        </Link>
+
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant='outline' size='icon' title='Menu'>
+              <Bars3Icon className='size-6' />
+            </Button>
+          </SheetTrigger>
+          <SheetContent className='border-[var(--black12)] bg-[var(--black15)] px-4 py-20'>
+            <SheetHeader className='hidden'>
+              <SheetTitle>Menu</SheetTitle>
+              <SheetDescription>
+                Navegue pelas páginas disponíveis no site.
+              </SheetDescription>
+            </SheetHeader>
+            <div className='flex flex-col gap-20'>
+              <nav>
+                <ul className='flex flex-col gap-4'>
+                  {navItems.map(({ name, path }, key) => (
+                    <li
+                      key={key}
+                      className={cn(
+                        'cursor-pointer py-3 text-sm text-[var(--grey75)] transition-all',
+                        'hover:rounded-md hover:bg-[var(--black10)] hover:px-5 hover:font-medium hover:text-white',
+                        pathname === path &&
+                          'rounded-md bg-[var(--black10)] px-5 py-3 font-medium text-white',
+                      )}
+                    >
+                      <SheetClose asChild>
+                        <Link href={path}>{name}</Link>
+                      </SheetClose>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              <SearchInput />
+
+              <Button>Entrar</Button>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+    </section>
   );
 }
