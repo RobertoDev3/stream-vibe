@@ -23,8 +23,10 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <div className='absolute left-1/2 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 md:px-20 2xl:px-0'>
-      <Logo />
+    <div className='absolute left-1/2 z-20 hidden w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 sm:flex md:px-20 2xl:px-0'>
+      <Link href='/'>
+        <Logo />
+      </Link>
 
       <nav className='my-4 rounded-lg border-3 border-[var(--black12)] bg-[var(--black06)]'>
         <ul className='flex h-full items-center gap-4 px-4 py-2'>
