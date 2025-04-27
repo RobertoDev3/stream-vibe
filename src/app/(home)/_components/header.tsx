@@ -11,8 +11,8 @@ export function Header() {
   return (
     <header className='relative overflow-hidden'>
       <section className='absolute left-1/2 h-[calc(100dvh-200px)] w-[1785px] -translate-x-1/2 overflow-hidden md:h-[calc(100dvh-300px)]'>
-        <div className='absolute top-0 left-0 h-full w-full bg-gradient-to-b from-[var(--black08)] to-transparent' />
-        <div className='absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-[var(--black08)] to-transparent' />
+        <div className='absolute top-0 left-0 h-full w-full bg-gradient-to-b from-[var(--black08)] to-transparent to-70%' />
+        <div className='absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-[var(--black08)] to-transparent to-70%' />
 
         <div className='flex flex-wrap justify-center gap-3'>
           {movies?.map(
