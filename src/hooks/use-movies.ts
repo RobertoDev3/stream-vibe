@@ -1,4 +1,4 @@
-import { getMoviesDiscover } from '@/services/movie-services';
+import { getMoviesHeader } from '@/services/movie-services';
 import { useQuery } from '@tanstack/react-query';
 
 export function useMovies() {
@@ -8,7 +8,7 @@ export function useMovies() {
     error,
   } = useQuery({
     queryKey: ['movies'],
-    queryFn: getMoviesDiscover,
+    queryFn: getMoviesHeader,
   });
 
   return {
