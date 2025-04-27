@@ -85,28 +85,29 @@ export function Nav() {
                 Navegue pelas páginas disponíveis no site.
               </SheetDescription>
             </SheetHeader>
-            <div className='flex flex-col gap-20'>
+            <div className='flex flex-col gap-10'>
               <nav>
                 <ul className='flex flex-col gap-4'>
                   {navItems.map(({ name, path }, key) => (
-                    <li
-                      key={key}
-                      className={cn(
-                        'cursor-pointer py-3 text-sm text-[var(--grey75)] transition-all',
-                        'hover:rounded-md hover:bg-[var(--black10)] hover:px-5 hover:font-medium hover:text-white',
-                        pathname === path &&
-                          'rounded-md bg-[var(--black10)] px-5 py-3 font-medium text-white',
-                      )}
-                    >
-                      <SheetClose asChild>
-                        <Link href={path}>{name}</Link>
-                      </SheetClose>
-                    </li>
+                    <SheetClose asChild key={key}>
+                      <Link href={path}>
+                        <li
+                          className={cn(
+                            'cursor-pointer py-3 text-sm text-[var(--grey75)] transition-all',
+                            'hover:rounded-md hover:bg-[var(--black10)] hover:px-5 hover:font-medium hover:text-white',
+                            pathname === path &&
+                              'rounded-md bg-[var(--black10)] px-5 py-3 font-medium text-white',
+                          )}
+                        >
+                          {name}
+                        </li>
+                      </Link>
+                    </SheetClose>
                   ))}
                 </ul>
               </nav>
 
-              <SearchInput />
+              <SearchInput placeholder='Pesquisar Filmes ou Séries' />
 
               <Button>Entrar</Button>
             </div>
