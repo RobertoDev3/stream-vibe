@@ -132,7 +132,7 @@ export function CategoriesCarousel() {
   ];
 
   return (
-    <section className='px-4 md:px-20 lg:flex 2xl:px-0'>
+    <section className='px-4 md:px-20 2xl:px-0'>
       <div className='mx-auto max-w-7xl space-y-20'>
         <div className='flex flex-col items-center justify-between gap-20 md:items-center lg:flex-row'>
           <div className='space-y-[14px] text-center lg:text-start'>
@@ -179,14 +179,17 @@ export function CategoriesCarousel() {
         >
           <CarouselContent>
             {categories.map((category, index) => (
-              <CarouselItem key={index} className='md:basis-1/4'>
-                <Card className='w-[295.4px] rounded-lg border border-[var(--black15)] bg-[var(--black10)] p-[30px]'>
+              <CarouselItem
+                key={index}
+                className='w-full sm:basis-1/2 md:basis-1/3 xl:basis-1/5'
+              >
+                <Card className='rounded-lg border border-[var(--black15)] bg-[var(--black10)] p-[30px]'>
                   <CardContent className='space-y-1 p-0'>
-                    <div className='relative grid grid-cols-2 gap-1'>
+                    <div className='relative grid grid-cols-2 gap-2'>
                       {category.items.map((item, i) => (
                         <div
                           key={i}
-                          className='h-[123.5px] w-full rounded-sm bg-[var(--black15)]'
+                          className='aspect-square w-full rounded-sm bg-[var(--black15)] bg-cover bg-center'
                           style={{ backgroundImage: `url(${item})` }}
                         />
                       ))}
