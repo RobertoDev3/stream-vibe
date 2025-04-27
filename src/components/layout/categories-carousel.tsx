@@ -4,6 +4,8 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 import { Card, CardContent } from '../ui/card';
+import { useCategoriesWithMovies } from '@/hooks/use-movies';
+import { MoviesCategorysProps } from '@/types/movies';
 
 type ApiProps = {
   scrollPrev: () => void;
@@ -19,122 +21,37 @@ export function CategoriesCarousel() {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
+  const {
+    categoriesWithMovies,
+  }: { categoriesWithMovies?: MoviesCategorysProps[] } =
+    useCategoriesWithMovies();
 
-    setCurrent(api.selectedScrollSnap());
-    setCount(api.scrollSnapList().length);
+  useEffect(() => {
+    if (!api) return;
 
     const onSelect = () => {
       setCurrent(api.selectedScrollSnap());
     };
 
+    const onReInit = () => {
+      setCurrent(api.selectedScrollSnap());
+      setCount(api.scrollSnapList().length);
+    };
+
     api.on('select', onSelect);
+    api.on('reInit', onReInit);
+    onReInit();
 
     return () => {
       api.off('select', onSelect);
+      api.off('reInit', onReInit);
     };
   }, [api]);
-
-  const categories = [
-    {
-      name: 'Action',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Adventure',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Comedy',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Drama',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Horror',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Documentary',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Sci-Fi',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Romance',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Animation',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-    {
-      name: 'Thriller',
-      items: [
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-        '/placeholder.svg?height=150&width=120',
-      ],
-    },
-  ];
 
   return (
     <section className='px-4 md:px-20 2xl:px-0'>
       <div className='mx-auto max-w-7xl space-y-20'>
-        <div className='flex flex-col items-center justify-between gap-20 md:items-center lg:flex-row'>
+        <div className='flex flex-col items-center justify-between gap-20 lg:flex-row lg:items-end'>
           <div className='space-y-[14px] text-center lg:text-start'>
             <h2 className='text-[38px] font-bold'>
               Explore nossa grande variedade de categorias
@@ -154,14 +71,16 @@ export function CategoriesCarousel() {
               <ArrowLeftIcon className='size-6' />
             </button>
 
-            <div className='flex gap-1'>
-              {Array.from({ length: count || 0 }).map((_, i) => (
-                <div
-                  key={i}
-                  className={`h-1 w-4 rounded-full transition-all duration-500 ${i === current ? 'w-6 bg-[var(--red45)]' : 'bg-[var(--black20)]'}`}
-                />
-              ))}
-            </div>
+            {count > 0 && (
+              <div className='flex gap-1'>
+                {Array.from({ length: count }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-1 rounded-full transition-all duration-500 ${i === current ? 'w-6 bg-[var(--red45)]' : 'w-4 bg-[var(--black20)]'}`}
+                  />
+                ))}
+              </div>
+            )}
 
             <button
               onClick={() => api?.scrollNext()}
@@ -178,25 +97,29 @@ export function CategoriesCarousel() {
           setApi={api => setApi(api as unknown as ApiProps)}
         >
           <CarouselContent>
-            {categories.map((category, index) => (
+            {categoriesWithMovies?.map((category, index) => (
               <CarouselItem
                 key={index}
                 className='w-full sm:basis-1/2 md:basis-1/3 xl:basis-1/5'
               >
                 <Card className='rounded-lg border border-[var(--black15)] bg-[var(--black10)] p-[30px]'>
                   <CardContent className='space-y-1 p-0'>
-                    <div className='relative grid grid-cols-2 gap-2'>
-                      {category.items.map((item, i) => (
-                        <div
-                          key={i}
-                          className='aspect-square w-full rounded-sm bg-[var(--black15)] bg-cover bg-center'
-                          style={{ backgroundImage: `url(${item})` }}
-                        />
-                      ))}
-                      <div className='absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-[var(--black10)] to-transparent to-25%' />
+                    <div className='relative grid grid-cols-2 gap-1'>
+                      {category.movies
+                        .slice(0, 4)
+                        .map(({ poster_path }, key: number) => (
+                          <div
+                            key={key}
+                            className='aspect-square w-full rounded-sm bg-[var(--black15)] bg-cover bg-center'
+                            style={{
+                              backgroundImage: `url(https://image.tmdb.org/t/p/w500/${poster_path})`,
+                            }}
+                          />
+                        ))}
+                      <div className='absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-[var(--black10)] to-transparent to-50%' />
                     </div>
                     <div className='flex items-center justify-between text-white'>
-                      <h3 className='font-semibold'>{category.name}</h3>
+                      <h3 className='font-semibold'>{category.nameCategory}</h3>
                       <ArrowRightIcon className='size-6' />
                     </div>
                   </CardContent>

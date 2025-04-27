@@ -1,12 +1,13 @@
 import LogoAbstract from '@/assets/logo/logo-abstract';
 import { buttonVariants } from '@/components/ui/button';
-import { useMovies } from '@/hooks/use-movies';
+import { useMoviesHeader } from '@/hooks/use-movies';
 import { cn } from '@/lib/utils';
+import { MovieProps } from '@/types/movies';
 import { PlayIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 export function Header() {
-  const { movies } = useMovies();
+  const { movies = [] }: { movies?: MovieProps[] } = useMoviesHeader();
 
   return (
     <header className='relative overflow-hidden'>
@@ -15,17 +16,15 @@ export function Header() {
         <div className='absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-[var(--black08)] to-transparent to-70%' />
 
         <div className='flex flex-wrap justify-center gap-3'>
-          {movies?.map(
-            ({ poster_path }: { poster_path: string }, key: number) => (
-              <div
-                key={key}
-                className='h-[190px] w-[140px] shrink-0 rounded-md bg-gray-700 bg-cover bg-center'
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/w500/${poster_path})`,
-                }}
-              />
-            ),
-          )}
+          {movies?.map(({ poster_path }, key: number) => (
+            <div
+              key={key}
+              className='h-[190px] w-[140px] shrink-0 rounded-md bg-gray-700 bg-cover bg-center'
+              style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/w500/${poster_path})`,
+              }}
+            />
+          ))}
         </div>
       </section>
 
