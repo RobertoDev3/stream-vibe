@@ -1,5 +1,6 @@
 'use client';
 
+import { CategoriesCarousel } from '@/components/layout/categories-carousel';
 import { Header } from './_components/header';
 
 export default function Home() {
@@ -7,13 +8,8 @@ export default function Home() {
     <main>
       <Header />
 
-      <section className='flex h-dvh items-center justify-center text-center'>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore,
-          perferendis beatae. Sint magni officiis voluptatibus omnis, facilis
-          est quo et ullam repudiandae eveniet sit reprehenderit expedita rerum
-          dolor possimus ex.
-        </p>
+      <section className='my-50'>
+        <CategoriesCarousel />
       </section>
     </main>
   );
