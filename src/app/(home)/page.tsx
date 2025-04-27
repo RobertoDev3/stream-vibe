@@ -1,4 +1,4 @@
-import LogoAbstract from '@/assets/logo-abstract';
+import LogoAbstract from '@/assets/logo/logo-abstract';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { PlayIcon } from '@heroicons/react/24/solid';
