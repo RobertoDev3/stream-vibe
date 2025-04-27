@@ -49,12 +49,12 @@ export function CategoriesCarousel() {
   }, [api]);
 
   return (
-    <section className='px-4 md:px-20 2xl:px-0'>
-      <div className='mx-auto max-w-7xl space-y-20'>
-        <div className='flex flex-col items-center justify-between gap-20 lg:flex-row lg:items-end'>
+    <div className='px-4 md:px-20 2xl:px-0'>
+      <div className='mx-auto max-w-7xl space-y-10 lg:space-y-20'>
+        <div className='flex flex-col items-center justify-between gap-10 lg:flex-row lg:items-end lg:gap-20'>
           <div className='space-y-[14px] text-center lg:text-start'>
             <h2 className='text-[38px] font-bold'>
-              Explore nossa grande variedade de categorias
+              Explore nossa grande variedade de filmes
             </h2>
             <p className='text-[var(--grey60)]'>
               Se você está procurando uma comédia para fazer você rir, um drama
@@ -72,7 +72,7 @@ export function CategoriesCarousel() {
             </button>
 
             {count > 0 && (
-              <div className='flex gap-1'>
+              <div className='hidden gap-1 sm:flex'>
                 {Array.from({ length: count }).map((_, i) => (
                   <div
                     key={i}
@@ -95,6 +95,10 @@ export function CategoriesCarousel() {
         <Carousel
           className='w-full'
           setApi={api => setApi(api as unknown as ApiProps)}
+          opts={{
+            align: 'start',
+            slidesToScroll: 'auto',
+          }}
         >
           <CarouselContent>
             {categoriesWithMovies?.map((category, index) => (
@@ -129,6 +133,6 @@ export function CategoriesCarousel() {
           </CarouselContent>
         </Carousel>
       </div>
-    </section>
+    </div>
   );
 }

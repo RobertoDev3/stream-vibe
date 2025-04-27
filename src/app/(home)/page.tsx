@@ -8,7 +8,7 @@ export default function Home() {
     <main>
       <Header />
 
-      <section className='my-50'>
+      <section className='my-25'>
         <CategoriesCarousel />
       </section>
     </main>
