@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { Nav } from '@/components/layout/nav';
 import { Manrope } from 'next/font/google';
 import { cn } from '@/lib/utils';
+import { Providers } from '@/context/providers';
 
 export const metadata: Metadata = {
   title: 'Stream Vibe',
@@ -23,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang='pt-BR' suppressHydrationWarning>
       <body className={cn('bg-[var(--black08)] text-white', manrope.className)}>
-        <Nav />
-        {children}
+        <Providers>
+          <Nav />
+          {children}
+        </Providers>
       </body>
     </html>
   );
