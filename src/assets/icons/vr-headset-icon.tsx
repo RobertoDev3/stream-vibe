@@ -11,7 +11,7 @@ export function VrHeadsetIcon({ className, ...props }: Props) {
       className={className}
       {...props}
     >
-      <g clip-path='url(#clip0_288_4691)'>
+      <g clipPath='url(#clip0_288_4691)'>
         <foreignObject x='-9.44727' y='-6.75' width='49.2051' height='42.898'>
           <div
             style={{

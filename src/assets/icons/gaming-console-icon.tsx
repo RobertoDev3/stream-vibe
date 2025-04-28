@@ -11,7 +11,7 @@ export function GamingConsoleIcon({ className, ...props }: Props) {
       className={className}
       {...props}
     >
-      <g clip-path='url(#clip0_288_4681)'>
+      <g clipPath='url(#clip0_288_4681)'>
         <foreignObject x='-10.354' y='-7.20073' width='51' height='43.7927'>
           <div
             style={{
