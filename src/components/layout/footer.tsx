@@ -3,57 +3,79 @@ import { Container } from './container';
 import { XIcon } from '@/assets/icons/x-icon';
 import { LinkedinIcon } from '@/assets/icons/linkedin-icon';
 import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
+import Link from 'next/link';
+
+type SiteMapProps = {
+  title: string;
+  links: {
+    name: string;
+    href: string;
+  }[];
+};
+
+const siteMap: SiteMapProps[] = [
+  {
+    title: 'Início',
+    links: [
+      { name: 'Categorias', href: 'categorys' },
+      { name: 'Dispositivos', href: 'devices' },
+      { name: 'Preços', href: 'pricing' },
+      { name: 'FAQ', href: 'faq' },
+    ],
+  },
+  {
+    title: 'Filmes',
+    links: [
+      { name: 'Gêneros', href: '/' },
+      { name: 'Tendência', href: '/' },
+      { name: 'Lançamentos', href: '/' },
+      { name: 'Popular', href: '/' },
+    ],
+  },
+  {
+    title: 'Séries',
+    links: [
+      { name: 'Gêneros', href: '/' },
+      { name: 'Tendência', href: '/' },
+      { name: 'Lançamentos', href: '/' },
+      { name: 'Popular', href: '/' },
+    ],
+  },
+  {
+    title: 'Suporte',
+    links: [{ name: 'Contate-nos', href: '/' }],
+  },
+  {
+    title: 'Assinatura',
+    links: [
+      { name: 'Planos', href: '/' },
+      { name: 'Benefícios', href: '/' },
+    ],
+  },
+];
 
 export function Footer() {
   return (
     <footer className='bg-[var(--black06)]'>
-      <Container className='pt-12 pb-5 md:pt-20 md:pb-10'>
-        <div className='grid grid-cols-2 gap-7.5'>
-          <div className='space-y-4'>
-            <h2 className='font-semibold'>Início</h2>
-            <ul className='space-y-2 text-sm font-medium text-[var(--grey60)]'>
-              <li>Categorias</li>
-              <li>Dispositivos</li>
-              <li>Preços</li>
-              <li>FAQ</li>
-            </ul>
-          </div>
-
-          <div className='space-y-4'>
-            <h2 className='font-semibold'>Filmes</h2>
-            <ul className='space-y-2 text-sm font-medium text-[var(--grey60)]'>
-              <li>Generos</li>
-              <li>Tendência</li>
-              <li>Lançamentos</li>
-              <li>Popular</li>
-            </ul>
-          </div>
-
-          <div className='space-y-4'>
-            <h2 className='font-semibold'>Séries</h2>
-            <ul className='space-y-2 text-sm font-medium text-[var(--grey60)]'>
-              <li>Generos</li>
-              <li>Tendência</li>
-              <li>Lançamentos</li>
-              <li>Popular</li>
-            </ul>
-          </div>
-
-          <div className='space-y-4'>
-            <h2 className='font-semibold'>Suporte</h2>
-            <ul className='space-y-2 text-sm font-medium text-[var(--grey60)]'>
-              <li>Contate-nos</li>
-            </ul>
-          </div>
-
-          <div className='space-y-4'>
-            <h2 className='font-semibold'>Assinatura</h2>
-            <ul className='space-y-2 text-sm font-medium text-[var(--grey60)]'>
-              <li>Planos</li>
-              <li>Benefícios</li>
-            </ul>
-          </div>
+      <Container className='space-y-12.5 pt-12 pb-5 md:space-y-20 md:pt-20 md:pb-10'>
+        <div className='grid grid-cols-2 gap-7.5 md:grid-cols-3 lg:grid-cols-6'>
+          {siteMap.map((item, key) => (
+            <div key={key} className='space-y-4'>
+              <h2 className='font-semibold'>{item.title}</h2>
+              <ul className='space-y-2 text-sm font-medium text-[var(--grey60)]'>
+                {item.links.map(link => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className='border-[var(--black15)] transition-all hover:text-white'
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           <div className='space-y-4'>
             <h2 className='font-semibold'>Conecte-se conosco</h2>
@@ -82,11 +104,29 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className='flex flex-col gap-2.5'>
-          <Separator />
-          <p className='text-sm text-[var(--grey60)]'>
-            ©2025 StreamVibe. Todos os direitos reservados.
-          </p>
+
+        <div className='flex flex-col gap-5 border-t border-[var(--black15)] pt-5 text-sm text-[var(--grey60)] lg:flex-row lg:justify-between'>
+          <p className=''>©2025 StreamVibe. Todos os direitos reservados.</p>
+          <div className='flex'>
+            <Link
+              href='/'
+              className='pr-4 text-center transition-all hover:text-white'
+            >
+              Termos de uso
+            </Link>
+            <Link
+              href='/'
+              className='border-x border-[var(--black15)] px-4 text-center transition-all hover:text-white'
+            >
+              Política de Privacidade
+            </Link>
+            <Link
+              href='/'
+              className='pl-4 text-center transition-all hover:text-white'
+            >
+              Política de Cookies
+            </Link>
+          </div>
         </div>
       </Container>
     </footer>
