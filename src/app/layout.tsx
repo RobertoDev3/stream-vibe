@@ -4,6 +4,7 @@ import { Nav } from '@/components/layout/nav';
 import { Manrope } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { Providers } from '@/context/providers';
+import { Footer } from '@/components/layout/footer';
 
 export const metadata: Metadata = {
   title: 'Stream Vibe',
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Providers>
           <Nav />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

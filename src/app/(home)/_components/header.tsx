@@ -1,4 +1,5 @@
 import LogoAbstract from '@/assets/logo/logo-abstract';
+import { Container } from '@/components/layout/container';
 import { buttonVariants } from '@/components/ui/button';
 import { useMoviesHeader } from '@/hooks/use-movies';
 import { cn } from '@/lib/utils';
@@ -28,7 +29,7 @@ export function Header() {
         </div>
       </section>
 
-      <section className='relative z-10 mx-auto flex max-w-7xl flex-col items-center justify-center space-y-10 px-4 pt-30 text-center md:px-20 xl:px-[162px]'>
+      <Container className='relative z-10 flex flex-col items-center justify-center space-y-10 pt-30 text-center'>
         <LogoAbstract className='size-[300px]' />
         <h1 className='text-5xl font-bold'>
           A melhor experiência de streaming
@@ -48,7 +49,7 @@ export function Header() {
           <PlayIcon className='size-6' />
           <span>Comece a Assistir Agora</span>
         </Link>
-      </section>
+      </Container>
     </header>
   );
 }

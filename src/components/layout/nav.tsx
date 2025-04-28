@@ -16,6 +16,7 @@ import {
   SheetTrigger,
 } from '../ui/sheet';
 import { SearchInput } from '../common/search-input';
+import { Container } from './container';
 
 type NavItem = {
   name: string;
@@ -35,7 +36,7 @@ export function Nav() {
   return (
     <section>
       {/* Desktop Nav */}
-      <div className='absolute left-1/2 z-20 my-4 hidden w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 md:px-20 lg:flex 2xl:px-0'>
+      <Container className='absolute left-1/2 z-20 my-4 hidden w-full -translate-x-1/2 items-center justify-between lg:flex'>
         <Link href='/'>
           <Logo />
         </Link>
@@ -64,10 +65,10 @@ export function Nav() {
           </Button>
           <Button variant='secondary'>Entrar</Button>
         </div>
-      </div>
+      </Container>
 
       {/* Mobile Nav */}
-      <div className='absolute left-1/2 z-20 my-4 flex w-full max-w-7xl -translate-x-1/2 items-center justify-between px-4 md:px-20 lg:hidden 2xl:px-0'>
+      <Container className='absolute left-1/2 z-20 my-4 flex w-full -translate-x-1/2 items-center justify-between lg:hidden'>
         <Link href='/'>
           <Logo />
         </Link>
@@ -113,7 +114,7 @@ export function Nav() {
             </div>
           </SheetContent>
         </Sheet>
-      </div>
+      </Container>
     </section>
   );
 }
