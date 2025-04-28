@@ -60,7 +60,9 @@ export function Footer() {
   const scrollToSection = (id: string) => {
     const element = document.querySelector(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const offset = 20;
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 
