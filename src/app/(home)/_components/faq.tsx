@@ -7,6 +7,23 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
+const faqData = [
+  {
+    question: 'O que é StreamVibe?',
+    answer:
+      'StreamVibe é um serviço de streaming que permite assistir a filmes e programas sob demanda.',
+  },
+  {
+    question: 'É estilizado?',
+    answer:
+      'Sim. Ele vem com estilos padrão que combinam com a estética dos outros componentes.',
+  },
+  {
+    question: 'É animado?',
+    answer: 'Sim. É animado por padrão, mas você pode desativá-lo se preferir.',
+  },
+];
+
 export function FAQ() {
   return (
     <Container className='space-y-10 lg:space-y-15'>
@@ -16,36 +33,14 @@ export function FAQ() {
       />
 
       <Accordion type='single' collapsible className='w-full'>
-        <AccordionItem value='item-1' className='flex gap-4'>
-          <div className='h-fit w-fit rounded-md border border-[var(--black15)] bg-[var(--black12)] px-4 py-3 font-semibold'>
-            01
-          </div>
-          <div className='flex w-full flex-col gap-2'>
-            <AccordionTrigger className='border-gradient p-0 text-xl font-medium'>
-              O que é StreamVibe?
+        {faqData.map((item, index) => (
+          <AccordionItem key={index} value={`item-${index}`}>
+            <AccordionTrigger number={String(index + 1)}>
+              {item.question}
             </AccordionTrigger>
-            <AccordionContent className='text-[var(--grey60)]'>
-              StreamVibe is a streaming service that allows you to watch movies
-              and shows on demand.
-            </AccordionContent>
-          </div>
-        </AccordionItem>
-
-        <AccordionItem value='item-2'>
-          <AccordionTrigger>Is it styled?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It comes with default styles that matches the other
-            components&apos; aesthetic.
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value='item-3'>
-          <AccordionTrigger>Is it animated?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you
-            prefer.
-          </AccordionContent>
-        </AccordionItem>
+            <AccordionContent>{item.answer}</AccordionContent>
+          </AccordionItem>
+        ))}
       </Accordion>
     </Container>
   );
