@@ -5,6 +5,7 @@ import { Devices } from './_components/devices';
 import { CategoriesCarousel } from '@/components/common/categories-carousel';
 import { useAllCategoriesMovies } from '@/hooks/use-movies';
 import { MoviesCategorysProps } from '@/types/movies';
+import { FAQ } from './_components/faq';
 
 export default function Home() {
   const {
@@ -20,6 +21,7 @@ export default function Home() {
         categoriesMovies={allCategoriesMovies}
       />
       <Devices id='devices' />
+      <FAQ />
     </main>
   );
 }

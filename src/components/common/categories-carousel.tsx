@@ -51,7 +51,7 @@ export function CategoriesCarousel({ id, categoriesMovies }: Props) {
   }, [api]);
 
   return (
-    <Container id={id} className='space-y-10 lg:space-y-20'>
+    <Container id={id} className='space-y-10 lg:space-y-15'>
       <div className='flex flex-col items-center justify-between gap-10 lg:flex-row lg:items-end lg:gap-20'>
         <Title
           title='Explore nossa grande variedade de filmes'
