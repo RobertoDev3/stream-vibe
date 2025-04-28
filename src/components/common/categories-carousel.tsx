@@ -4,7 +4,6 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 import { Card, CardContent } from '../ui/card';
-import { useCategoriesWithMovies } from '@/hooks/use-movies';
 import { MoviesCategorysProps } from '@/types/movies';
 import { Progress } from '../ui/progress';
 import { Title } from './title';
@@ -19,15 +18,15 @@ type ApiProps = {
   off: (event: string, callback: () => void) => void;
 };
 
-export function CategoriesCarousel({ id }: { id?: string }) {
+type Props = {
+  id?: string;
+  categoriesMovies?: MoviesCategorysProps[];
+};
+
+export function CategoriesCarousel({ id, categoriesMovies }: Props) {
   const [api, setApi] = useState<ApiProps>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-
-  const {
-    categoriesWithMovies,
-  }: { categoriesWithMovies?: MoviesCategorysProps[] } =
-    useCategoriesWithMovies();
 
   useEffect(() => {
     if (!api) return;
@@ -100,7 +99,7 @@ export function CategoriesCarousel({ id }: { id?: string }) {
           }}
         >
           <CarouselContent>
-            {categoriesWithMovies?.map((category, index) => (
+            {categoriesMovies?.map((category, index) => (
               <CarouselItem
                 key={index}
                 className='w-full sm:basis-1/2 md:basis-1/3 xl:basis-1/5'

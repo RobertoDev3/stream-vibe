@@ -22,9 +22,9 @@ export function useMoviesHeader() {
   };
 }
 
-export function useCategoriesWithMovies() {
+export function useAllCategoriesMovies() {
   const {
-    data: categoriesWithMovies,
+    data: allCategoriesMovies,
     isLoading,
     error,
   } = useQuery({
@@ -32,7 +32,7 @@ export function useCategoriesWithMovies() {
     queryFn: async () => {
       const categories = await getListMoviesCategorys();
 
-      const categoriesWithMovies = await Promise.all(
+      const allCategoriesMovies = await Promise.all(
         categories.map(async (category: { id: number; name: string }) => {
           const movies = await getMoviesByCategory(category.id);
 
@@ -44,12 +44,12 @@ export function useCategoriesWithMovies() {
         }),
       );
 
-      return categoriesWithMovies;
+      return allCategoriesMovies;
     },
   });
 
   return {
-    categoriesWithMovies,
+    allCategoriesMovies,
     isLoading,
     error,
   };
