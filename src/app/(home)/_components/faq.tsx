@@ -21,7 +21,7 @@ export function FAQ() {
             01
           </div>
           <div className='flex w-full flex-col gap-2'>
-            <AccordionTrigger className='p-0 text-xl font-medium'>
+            <AccordionTrigger className='border-gradient p-0 text-xl font-medium'>
               O que é StreamVibe?
             </AccordionTrigger>
             <AccordionContent className='text-[var(--grey60)]'>
