@@ -63,7 +63,7 @@ export function Devices({ id }: { id?: string }) {
         nunca perca um momento de entretenimento.'
       />
 
-      <section className='grid grid-cols-3 gap-5'>
+      <section className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3'>
         {devices.map(({ name, description, icon: DeviceIcon }, key) => (
           <div
             key={key}
