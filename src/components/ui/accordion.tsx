@@ -19,7 +19,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot='accordion-item'
-      className={cn('border-b last:border-b-0', className)}
+      className={cn('border-b', className)}
       style={{
         borderImageSource:
           'linear-gradient(to right, transparent, var(--red45), transparent )',
@@ -71,7 +71,7 @@ function AccordionContent({
       className='data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm text-[var(--grey60)]'
       {...props}
     >
-      <div className={cn('pt-0 pb-4 pl-16', className)}>{children}</div>
+      <div className={cn('pt-2 pb-4 pl-16', className)}>{children}</div>
     </AccordionPrimitive.Content>
   );
 }
