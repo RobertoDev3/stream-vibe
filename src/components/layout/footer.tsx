@@ -1,3 +1,5 @@
+'use client';
+
 import { FacebookIcon } from '@/assets/icons/facebook-icon';
 import { Container } from './container';
 import { XIcon } from '@/assets/icons/x-icon';
@@ -17,10 +19,10 @@ const siteMap: SiteMapProps[] = [
   {
     title: 'Início',
     links: [
-      { name: 'Categorias', href: 'categorys' },
-      { name: 'Dispositivos', href: 'devices' },
-      { name: 'Preços', href: 'pricing' },
-      { name: 'FAQ', href: 'faq' },
+      { name: 'Categorias', href: '#categorys' },
+      { name: 'Dispositivos', href: '#devices' },
+      { name: 'Preços', href: '#pricing' },
+      { name: 'FAQ', href: '#faq' },
     ],
   },
   {
@@ -55,8 +57,15 @@ const siteMap: SiteMapProps[] = [
 ];
 
 export function Footer() {
+  const scrollToSection = (id: string) => {
+    const element = document.querySelector(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className='bg-[var(--black06)]'>
+    <footer className='mt-25 bg-[var(--black06)]'>
       <Container className='space-y-12.5 pt-12 pb-5 md:space-y-20 md:pt-20 md:pb-10'>
         <div className='grid grid-cols-2 gap-7.5 md:grid-cols-3 lg:grid-cols-6'>
           {siteMap.map((item, key) => (
@@ -68,6 +77,10 @@ export function Footer() {
                     <Link
                       href={link.href}
                       className='border-[var(--black15)] transition-all hover:text-white'
+                      onClick={e => {
+                        e.preventDefault();
+                        scrollToSection(link.href);
+                      }}
                     >
                       {link.name}
                     </Link>
@@ -83,6 +96,7 @@ export function Footer() {
               <Button
                 size='icon'
                 variant='secondary'
+                title='Facebook'
                 className='rounded-sm p-2.5'
               >
                 <FacebookIcon className='size-5' />
@@ -90,6 +104,7 @@ export function Footer() {
               <Button
                 size='icon'
                 variant='secondary'
+                title='X'
                 className='rounded-sm p-2.5'
               >
                 <XIcon className='size-5 fill-white' />
@@ -97,6 +112,7 @@ export function Footer() {
               <Button
                 size='icon'
                 variant='secondary'
+                title='Linkedin'
                 className='rounded-sm p-2.5'
               >
                 <LinkedinIcon className='size-5' />

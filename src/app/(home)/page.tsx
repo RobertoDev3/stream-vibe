@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className='space-y-25'>
       <Header />
-      <CategoriesCarousel />
+      <CategoriesCarousel id='categorys' />
     </main>
   );
 }

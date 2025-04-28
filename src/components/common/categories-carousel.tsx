@@ -16,7 +16,11 @@ type ApiProps = {
   off: (event: string, callback: () => void) => void;
 };
 
-export function CategoriesCarousel() {
+type Props = {
+  id?: string;
+};
+
+export function CategoriesCarousel({ id }: Props) {
   const [api, setApi] = useState<ApiProps>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -49,7 +53,7 @@ export function CategoriesCarousel() {
   }, [api]);
 
   return (
-    <div className='px-4 md:px-20 2xl:px-0'>
+    <div id={id} className='px-4 md:px-20 2xl:px-0'>
       <div className='mx-auto max-w-7xl space-y-10 lg:space-y-20'>
         <div className='flex flex-col items-center justify-between gap-10 lg:flex-row lg:items-end lg:gap-20'>
           <div className='space-y-[14px] text-center lg:text-start'>
