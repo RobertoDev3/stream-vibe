@@ -22,7 +22,6 @@ export default function LogoAbstract({ className, ...props }: Props) {
           strokeOpacity='0.5'
         />
       </g>
-
       <g data-figma-bg-blur-radius='12'>
         <path
           fillRule='evenodd'

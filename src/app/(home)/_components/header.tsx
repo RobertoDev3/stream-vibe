@@ -31,6 +31,7 @@ export function Header() {
 
       <Container className='relative z-10 flex flex-col items-center justify-center space-y-10 pt-30 text-center'>
         <LogoAbstract className='size-[300px]' />
+
         <h1 className='text-5xl font-bold'>
           A melhor experiência de streaming
         </h1>
