@@ -7,6 +7,7 @@ import { Card, CardContent } from '../ui/card';
 import { useCategoriesWithMovies } from '@/hooks/use-movies';
 import { MoviesCategorysProps } from '@/types/movies';
 import { Progress } from '../ui/progress';
+import { Title } from './title';
 
 type ApiProps = {
   scrollPrev: () => void;
@@ -57,15 +58,11 @@ export function CategoriesCarousel({ id }: Props) {
     <div id={id} className='px-4 md:px-20 2xl:px-0'>
       <div className='mx-auto max-w-7xl space-y-10 lg:space-y-20'>
         <div className='flex flex-col items-center justify-between gap-10 lg:flex-row lg:items-end lg:gap-20'>
-          <div className='space-y-[14px] text-center lg:text-start'>
-            <h2 className='text-[38px] font-bold'>
-              Explore nossa grande variedade de filmes
-            </h2>
-            <p className='text-[var(--grey60)]'>
-              Se você está procurando uma comédia para fazer você rir, um drama
-              para fazer você pensar ou um documentário para aprender algo novo.
-            </p>
-          </div>
+          <Title
+            title='Explore nossa grande variedade de filmes'
+            description='Se você está procurando uma comédia para fazer você rir, um drama
+              para fazer você pensar ou um documentário para aprender algo novo.'
+          />
 
           <div className='hidden items-center gap-4 rounded-lg border border-[var(--black12)] bg-[var(--black06)] p-4 lg:flex'>
             <button
