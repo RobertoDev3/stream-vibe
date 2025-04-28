@@ -127,7 +127,9 @@ export function CategoriesCarousel({ id }: Props) {
                       <div className='absolute bottom-0 left-0 h-full w-full bg-gradient-to-t from-[var(--black10)] to-transparent to-50%' />
                     </div>
                     <div className='flex items-center justify-between text-white'>
-                      <h3 className='font-semibold'>{category.nameCategory}</h3>
+                      <h3 className='truncate text-sm font-semibold'>
+                        {category.nameCategory}
+                      </h3>
                       <ArrowRightIcon className='size-6' />
                     </div>
                   </CardContent>
