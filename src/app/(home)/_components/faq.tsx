@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { maskTwoDigits } from '@/lib/masks';
 
 const faqData = [
   {
@@ -35,7 +36,7 @@ export function FAQ() {
       <Accordion type='single' collapsible className='w-full'>
         {faqData.map((item, index) => (
           <AccordionItem key={index} value={`item-${index}`}>
-            <AccordionTrigger number={String(index + 1)}>
+            <AccordionTrigger number={maskTwoDigits(String(index + 1))}>
               {item.question}
             </AccordionTrigger>
             <AccordionContent>{item.answer}</AccordionContent>
