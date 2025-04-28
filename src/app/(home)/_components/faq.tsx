@@ -14,13 +14,23 @@ export function FAQ() {
         title='Perguntas frequentes'
         description='Tem perguntas? Temos respostas! Confira nossa seção de perguntas frequentes para encontrar respostas para as perguntas mais comuns sobre StreamVibe.'
       />
+
       <Accordion type='single' collapsible className='w-full'>
-        <AccordionItem value='item-1'>
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
-          </AccordionContent>
+        <AccordionItem value='item-1' className='flex gap-4'>
+          <div className='h-fit w-fit rounded-md border border-[var(--black15)] bg-[var(--black12)] px-4 py-3 font-semibold'>
+            01
+          </div>
+          <div className='flex w-full flex-col gap-2'>
+            <AccordionTrigger className='p-0 text-xl font-medium'>
+              O que é StreamVibe?
+            </AccordionTrigger>
+            <AccordionContent className='text-[var(--grey60)]'>
+              StreamVibe is a streaming service that allows you to watch movies
+              and shows on demand.
+            </AccordionContent>
+          </div>
         </AccordionItem>
+
         <AccordionItem value='item-2'>
           <AccordionTrigger>Is it styled?</AccordionTrigger>
           <AccordionContent>
@@ -28,6 +38,7 @@ export function FAQ() {
             components&apos; aesthetic.
           </AccordionContent>
         </AccordionItem>
+
         <AccordionItem value='item-3'>
           <AccordionTrigger>Is it animated?</AccordionTrigger>
           <AccordionContent>
