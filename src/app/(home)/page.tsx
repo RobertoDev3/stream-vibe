@@ -21,7 +21,7 @@ export default function Home() {
         categoriesMovies={allCategoriesMovies}
       />
       <Devices id='devices' />
-      <FAQ />
+      <FAQ id='faq' />
     </main>
   );
 }

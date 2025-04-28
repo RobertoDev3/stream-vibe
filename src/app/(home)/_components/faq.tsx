@@ -51,15 +51,15 @@ const faqData = [
   },
 ];
 
-export function FAQ() {
+export function FAQ({ id }: { id?: string }) {
   return (
-    <Container className='space-y-10 lg:space-y-15'>
+    <Container id={id} className='space-y-[24px] lg:space-y-[44px]'>
       <Title
         title='Perguntas frequentes'
         description='Tem perguntas? Temos respostas! Confira nossa seção de perguntas frequentes para encontrar respostas para as perguntas mais comuns sobre StreamVibe.'
       />
 
-      <div className='grid w-full grid-cols-1 gap-x-20 md:grid-cols-2'>
+      <div className='grid w-full grid-cols-1 gap-x-20 min-[1095px]:grid-cols-2'>
         {/* Lado esquerdo */}
         <Accordion type='multiple'>
           {faqData
