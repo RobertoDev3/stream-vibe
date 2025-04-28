@@ -19,11 +19,7 @@ type ApiProps = {
   off: (event: string, callback: () => void) => void;
 };
 
-type Props = {
-  id?: string;
-};
-
-export function CategoriesCarousel({ id }: Props) {
+export function CategoriesCarousel({ id }: { id?: string }) {
   const [api, setApi] = useState<ApiProps>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
