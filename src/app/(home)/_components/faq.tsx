@@ -5,7 +5,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@radix-ui/react-accordion';
+} from '@/components/ui/accordion';
 
 export function FAQ() {
   return (
