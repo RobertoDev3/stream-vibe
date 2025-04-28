@@ -54,7 +54,7 @@ const devices: DeviceProps[] = [
 
 export function Devices() {
   return (
-    <Container className='space-y-10 lg:space-y-20'>
+    <Container id='devices' className='space-y-10 lg:space-y-20'>
       <Title
         title='Nós fornecemos experiência de streaming em vários dispositivos.'
         description='Com o StreamVibe, você pode apreciar seus filmes e Séries favoritas a
