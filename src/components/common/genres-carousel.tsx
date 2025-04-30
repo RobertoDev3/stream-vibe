@@ -20,8 +20,6 @@ export function GenresCarousel({ id, genresMovies }: Props) {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
-  console.log('genresMovies', genresMovies);
-
   useEffect(() => {
     if (!api) return;
 

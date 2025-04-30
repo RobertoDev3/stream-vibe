@@ -7,13 +7,18 @@ import {
   getTopRatedMovies,
   getPopularMovies,
 } from '@/services/movie-services';
-import { useMoviesStore } from '@/store/movies-store';
+import {
+  useAllCategorysMoviesStore,
+  useTrendingMoviesWeekForHeaderStore,
+} from '@/store/movies-store';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 export function useTrendingMoviesWeekForHeader() {
-  const movies = useMoviesStore(state => state.movies);
-  const setMovies = useMoviesStore(state => state.setMovies);
+  const movies = useTrendingMoviesWeekForHeaderStore(state => state.movies);
+  const setMovies = useTrendingMoviesWeekForHeaderStore(
+    state => state.setMovies,
+  );
 
   const {
     data: fetchedMovies,
@@ -80,17 +85,24 @@ export function useAllGenresMovies() {
 }
 
 export function useAllCategorysMovies() {
-  const { data, isLoading, error } = useQuery({
+  const movies = useAllCategorysMoviesStore(state => state.movies);
+  const setMovies = useAllCategorysMoviesStore(state => state.setMovies);
+
+  const {
+    data: fetchedMoviesCategorys,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['all-categorys-movies'],
-    queryFn: async () =>
-      await Promise.all([
+    queryFn: async () => {
+      const data = await Promise.all([
         getTrendingMoviesWeek({ page: 1 }),
         getNowPlayingMovies({ page: 1 }),
         getPopularMovies({ page: 1 }),
         getTopRatedMovies({ page: 1 }),
         getUpcomingMovies({ page: 1 }),
-      ]),
-    select: data => {
+      ]);
+
       return {
         trendingMoviesAndSeries: data[0],
         nowPlayingMovies: data[1],
@@ -99,10 +111,29 @@ export function useAllCategorysMovies() {
         upcomingMovies: data[4],
       };
     },
+    enabled:
+      movies.trendingMoviesAndSeries.length === 0 &&
+      movies.nowPlayingMovies.length === 0 &&
+      movies.popularMovies.length === 0 &&
+      movies.topRatedMovies.length === 0 &&
+      movies.upcomingMovies.length === 0,
   });
 
+  useEffect(() => {
+    const isMoviesEmpty =
+      movies.trendingMoviesAndSeries.length === 0 &&
+      movies.nowPlayingMovies.length === 0 &&
+      movies.popularMovies.length === 0 &&
+      movies.topRatedMovies.length === 0 &&
+      movies.upcomingMovies.length === 0;
+
+    if (fetchedMoviesCategorys && isMoviesEmpty) {
+      setMovies(fetchedMoviesCategorys);
+    }
+  }, [fetchedMoviesCategorys, movies, setMovies]);
+
   return {
-    allCategorysMovies: data,
+    allCategorysMovies: movies,
     isLoading,
     error,
   };

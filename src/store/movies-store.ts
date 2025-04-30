@@ -1,12 +1,31 @@
 import { create } from 'zustand';
-import { MovieProps } from '@/types/movies';
+import { AllCategorysMoviesProps, MovieProps } from '@/types/movies';
 
-type MoviesStore = {
+type TrendingMoviesWeekForHeaderStoreProps = {
   movies: MovieProps[];
   setMovies: (movies: MovieProps[]) => void;
 };
 
-export const useMoviesStore = create<MoviesStore>(set => ({
-  movies: [],
-  setMovies: movies => set({ movies }),
-}));
+type AllCategorysMoviesStoreProps = {
+  movies: AllCategorysMoviesProps;
+  setMovies: (movies: AllCategorysMoviesProps) => void;
+};
+
+export const useTrendingMoviesWeekForHeaderStore =
+  create<TrendingMoviesWeekForHeaderStoreProps>(set => ({
+    movies: [],
+    setMovies: movies => set({ movies }),
+  }));
+
+export const useAllCategorysMoviesStore = create<AllCategorysMoviesStoreProps>(
+  set => ({
+    movies: {
+      trendingMoviesAndSeries: [],
+      nowPlayingMovies: [],
+      popularMovies: [],
+      topRatedMovies: [],
+      upcomingMovies: [],
+    },
+    setMovies: movies => set({ movies }),
+  }),
+);
