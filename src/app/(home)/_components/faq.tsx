@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
 import { maskTwoDigits } from '@/lib/masks';
 
 const faqData = [
@@ -54,10 +55,14 @@ const faqData = [
 export function FAQ({ id }: { id: string }) {
   return (
     <Container id={id} className='space-y-[24px] lg:space-y-[44px]'>
-      <Title
-        title='Perguntas frequentes'
-        description='Tem perguntas? Temos respostas! Confira nossa seção de perguntas frequentes para encontrar respostas para as perguntas mais comuns sobre StreamVibe.'
-      />
+      <div className='flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-20'>
+        <Title
+          title='Perguntas frequentes'
+          description='Tem perguntas? Temos respostas! Confira nossa seção de perguntas frequentes para encontrar respostas para as perguntas mais comuns sobre StreamVibe.'
+        />
+
+        <Button>Faça uma pergunta</Button>
+      </div>
 
       <div className='grid w-full grid-cols-1 gap-x-20 min-[1095px]:grid-cols-2'>
         {/* Lado esquerdo */}
