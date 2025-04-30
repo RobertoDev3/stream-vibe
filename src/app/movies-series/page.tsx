@@ -1,7 +1,9 @@
+import { Header } from './_components/header';
+
 export default function MoviesSeries() {
   return (
-    <main className='flex h-dvh items-center justify-center'>
-      <div>página Filmes e Séries</div>
+    <main className='space-y-25'>
+      <Header />
     </main>
   );
 }
