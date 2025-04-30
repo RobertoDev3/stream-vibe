@@ -57,3 +57,45 @@ export async function getNowPlayingMovies({ page }: { page?: number }) {
   );
   return response.data.results;
 }
+
+export async function getPopularMovies({ page }: { page?: number }) {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_TMDB_API_URL}/movie/popular`,
+    {
+      params: {
+        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+        language: 'pt-BR',
+        page: page,
+      },
+    },
+  );
+  return response.data.results;
+}
+
+export async function getTopRatedMovies({ page }: { page?: number }) {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_TMDB_API_URL}/movie/top_rated`,
+    {
+      params: {
+        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+        language: 'pt-BR',
+        page: page,
+      },
+    },
+  );
+  return response.data.results;
+}
+
+export async function getUpcomingMovies({ page }: { page?: number }) {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_TMDB_API_URL}/movie/upcoming`,
+    {
+      params: {
+        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+        language: 'pt-BR',
+        page: page,
+      },
+    },
+  );
+  return response.data.results;
+}

@@ -19,11 +19,11 @@ export function Header() {
   const { allCategorysMovies, isLoading } = useAllCategorysMovies();
 
   const [isSelectedMovie, setIsSelectedMovie] = useState<MovieProps>(
-    allCategorysMovies?.[2],
+    allCategorysMovies?.trendingMoviesAndSeries?.[2],
   );
 
   useEffect(() => {
-    setIsSelectedMovie(allCategorysMovies?.[2]);
+    setIsSelectedMovie(allCategorysMovies?.trendingMoviesAndSeries?.[2]);
   }, [allCategorysMovies]);
 
   console.log('isSelectedMovie', isSelectedMovie);
@@ -51,7 +51,7 @@ export function Header() {
         <div className='flex h-full max-w-[600px] flex-col justify-end space-y-10'>
           <div className='space-y-4'>
             <h2 className='text-4xl font-semibold md:text-6xl'>
-              {isSelectedMovie?.title}
+              {isSelectedMovie?.title || isSelectedMovie?.name}
             </h2>
             <div className='flex items-center gap-2'>
               <div className='flex items-center gap-2'>
@@ -64,7 +64,13 @@ export function Header() {
                 </p>
               </div>
               <p>&#8226;</p>
-              <p>{maskYear(isSelectedMovie?.release_date)}</p>
+              <p>
+                {maskYear(
+                  isSelectedMovie?.release_date ||
+                    isSelectedMovie?.first_air_date ||
+                    '',
+                )}
+              </p>
             </div>
             <p className='line-clamp-3'>{isSelectedMovie?.overview}</p>
           </div>
@@ -86,29 +92,31 @@ export function Header() {
         }}
       >
         <CarouselContent className='flex h-[260px] items-end gap-3'>
-          {allCategorysMovies?.map((movie: MovieProps) => (
-            <CarouselItem key={movie.id} className='flex-none p-0'>
-              <Card
-                className={cn(
-                  'transition-all duration-300 ease-in-out',
-                  isSelectedMovie === movie
-                    ? 'h-[260px] w-[176px]'
-                    : 'h-[208px] w-[140px]',
-                  'rounded-lg border-none bg-cover bg-center p-0 text-center text-white',
-                )}
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`,
-                }}
-              >
-                <button
-                  className='h-full w-full cursor-pointer'
-                  onClick={() => setIsSelectedMovie(movie)}
+          {allCategorysMovies?.trendingMoviesAndSeries?.map(
+            (movie: MovieProps) => (
+              <CarouselItem key={movie.id} className='flex-none p-0'>
+                <Card
+                  className={cn(
+                    'transition-all duration-300 ease-in-out',
+                    isSelectedMovie === movie
+                      ? 'h-[260px] w-[176px]'
+                      : 'h-[208px] w-[140px]',
+                    'rounded-lg border-none bg-cover bg-center p-0 text-center text-white',
+                  )}
+                  style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`,
+                  }}
                 >
-                  <p className='hidden'>{movie.title}</p>
-                </button>
-              </Card>
-            </CarouselItem>
-          ))}
+                  <button
+                    className='h-full w-full cursor-pointer'
+                    onClick={() => setIsSelectedMovie(movie)}
+                  >
+                    <p className='hidden'>{movie.title || movie.name}</p>
+                  </button>
+                </Card>
+              </CarouselItem>
+            ),
+          )}
         </CarouselContent>
       </Carousel>
     </div>

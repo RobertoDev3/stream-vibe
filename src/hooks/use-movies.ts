@@ -3,6 +3,9 @@ import {
   getMoviesByGenres,
   getTrendingMoviesWeek,
   getNowPlayingMovies,
+  getUpcomingMovies,
+  getTopRatedMovies,
+  getPopularMovies,
 } from '@/services/movie-services';
 import { useMoviesStore } from '@/store/movies-store';
 import { useQuery } from '@tanstack/react-query';
@@ -79,7 +82,23 @@ export function useAllGenresMovies() {
 export function useAllCategorysMovies() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['all-categorys-movies'],
-    queryFn: () => getNowPlayingMovies({ page: 1 }),
+    queryFn: async () =>
+      await Promise.all([
+        getTrendingMoviesWeek({ page: 1 }),
+        getNowPlayingMovies({ page: 1 }),
+        getPopularMovies({ page: 1 }),
+        getTopRatedMovies({ page: 1 }),
+        getUpcomingMovies({ page: 1 }),
+      ]),
+    select: data => {
+      return {
+        trendingMoviesAndSeries: data[0],
+        nowPlayingMovies: data[1],
+        popularMovies: data[2],
+        topRatedMovies: data[3],
+        upcomingMovies: data[4],
+      };
+    },
   });
 
   return {
