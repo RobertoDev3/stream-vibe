@@ -26,8 +26,6 @@ export function Header() {
     setIsSelectedMovie(allCategorysMovies?.trendingMoviesAndSeries?.[2]);
   }, [allCategorysMovies]);
 
-  console.log('isSelectedMovie', isSelectedMovie);
-
   if (isLoading) {
     return (
       <div className='flex h-dvh items-center justify-center'>
