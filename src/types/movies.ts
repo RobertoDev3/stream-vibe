@@ -15,8 +15,8 @@ export type MovieProps = {
   vote_count: number;
 };
 
-export type MoviesCategorysProps = {
-  idCategory: number;
-  nameCategory: string;
+export type GenresMoviesProps = {
+  idGenre: number;
+  nameGenre: string;
   movies: MovieProps[];
 };

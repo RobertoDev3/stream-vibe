@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 import { Card, CardContent } from '../ui/card';
-import { MoviesCategorysProps } from '@/types/movies';
+import { GenresMoviesProps } from '@/types/movies';
 import { Progress } from '../ui/progress';
 import { Title } from './title';
 import { Container } from '../layout/container';
@@ -12,10 +12,10 @@ import { ApiProps } from '@/types/globals';
 
 type Props = {
   id?: string;
-  categoriesMovies?: MoviesCategorysProps[];
+  genresMovies?: GenresMoviesProps[];
 };
 
-export function CategoriesCarousel({ id, categoriesMovies }: Props) {
+export function GenresCarousel({ id, genresMovies }: Props) {
   const [api, setApi] = useState<ApiProps>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -91,7 +91,7 @@ export function CategoriesCarousel({ id, categoriesMovies }: Props) {
           }}
         >
           <CarouselContent>
-            {categoriesMovies?.map((category, index) => (
+            {genresMovies?.map((genre, index) => (
               <CarouselItem
                 key={index}
                 className='w-full sm:basis-1/2 md:basis-1/3 xl:basis-1/5'
@@ -99,7 +99,7 @@ export function CategoriesCarousel({ id, categoriesMovies }: Props) {
                 <Card className='rounded-lg border border-[var(--black15)] bg-[var(--black10)] p-[30px]'>
                   <CardContent className='space-y-1 p-0'>
                     <div className='relative grid grid-cols-2 gap-1'>
-                      {category.movies
+                      {genre.movies
                         .slice(0, 4)
                         .map(({ poster_path }, key: number) => (
                           <div
@@ -114,7 +114,7 @@ export function CategoriesCarousel({ id, categoriesMovies }: Props) {
                     </div>
                     <div className='flex items-center justify-between text-white'>
                       <h3 className='truncate text-[16px] font-semibold md:text-sm'>
-                        {category.nameCategory}
+                        {genre.nameGenre}
                       </h3>
                       <ArrowRightIcon className='size-6' />
                     </div>
