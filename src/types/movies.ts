@@ -16,7 +16,7 @@ export type MovieProps = {
 };
 
 export type GenresMoviesProps = {
-  idGenre: number;
-  nameGenre: string;
+  idCategory: number;
+  nameCategory: string;
   movies: MovieProps[];
 };

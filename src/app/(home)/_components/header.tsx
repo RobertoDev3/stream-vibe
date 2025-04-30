@@ -1,14 +1,15 @@
 import LogoAbstract from '@/assets/logo/logo-abstract';
 import { Container } from '@/components/layout/container';
 import { buttonVariants } from '@/components/ui/button';
-import { useMoviesHeader } from '@/hooks/use-movies';
+import { useTrendingMoviesWeekForHeader } from '@/hooks/use-movies';
 import { cn } from '@/lib/utils';
 import { MovieProps } from '@/types/movies';
 import { PlayIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 export function Header() {
-  const { movies }: { movies?: MovieProps[] } = useMoviesHeader();
+  const { movies }: { movies?: MovieProps[] } =
+    useTrendingMoviesWeekForHeader();
 
   return (
     <header className='relative overflow-hidden'>

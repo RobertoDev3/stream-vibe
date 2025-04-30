@@ -20,6 +20,8 @@ export function GenresCarousel({ id, genresMovies }: Props) {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
+  console.log('genresMovies', genresMovies);
+
   useEffect(() => {
     if (!api) return;
 
@@ -114,7 +116,7 @@ export function GenresCarousel({ id, genresMovies }: Props) {
                     </div>
                     <div className='flex items-center justify-between text-white'>
                       <h3 className='truncate text-[16px] font-semibold md:text-sm'>
-                        {genre.nameGenre}
+                        {genre.nameCategory}
                       </h3>
                       <ArrowRightIcon className='size-6' />
                     </div>

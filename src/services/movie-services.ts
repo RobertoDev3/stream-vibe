@@ -1,39 +1,5 @@
 import axios from 'axios';
 
-export async function getMoviesHeader() {
-  const [page1, page2, page3] = await Promise.all([
-    axios.get(`${process.env.NEXT_PUBLIC_TMDB_API_URL}/discover/movie`, {
-      params: {
-        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
-        language: 'pt-BR',
-        page: 1,
-      },
-    }),
-    axios.get(`${process.env.NEXT_PUBLIC_TMDB_API_URL}/discover/movie`, {
-      params: {
-        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
-        language: 'pt-BR',
-        page: 2,
-      },
-    }),
-    axios.get(`${process.env.NEXT_PUBLIC_TMDB_API_URL}/discover/movie`, {
-      params: {
-        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
-        language: 'pt-BR',
-        page: 3,
-      },
-    }),
-  ]);
-
-  const combined = [
-    ...page1.data.results,
-    ...page2.data.results,
-    ...page3.data.results,
-  ];
-
-  return combined;
-}
-
 export async function getListMoviesGenres() {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_TMDB_API_URL}/genre/movie/list`,
@@ -63,13 +29,29 @@ export async function getMoviesByGenres(genreId: number) {
   return response.data.results;
 }
 
-export async function getNowPlayingMovies() {
+export async function getTrendingMoviesWeek({ page = 1 }: { page?: number }) {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_TMDB_API_URL}/trending/all/week`,
+    {
+      params: {
+        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+        language: 'pt-BR',
+        page: page,
+      },
+    },
+  );
+
+  return response.data.results;
+}
+
+export async function getNowPlayingMovies({ page = 1 }: { page?: number }) {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_TMDB_API_URL}/movie/now_playing`,
     {
       params: {
         api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
         language: 'pt-BR',
+        page: page,
       },
     },
   );

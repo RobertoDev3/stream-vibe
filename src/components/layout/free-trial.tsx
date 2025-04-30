@@ -1,13 +1,14 @@
 'use client';
 
-import { useMoviesHeader } from '@/hooks/use-movies';
+import { useTrendingMoviesWeekForHeader } from '@/hooks/use-movies';
 import { Title } from '../common/title';
 import { Button } from '../ui/button';
 import { Container } from './container';
 import { MovieProps } from '@/types/movies';
 
 export function FreeTrial() {
-  const { movies }: { movies?: MovieProps[] } = useMoviesHeader();
+  const { movies }: { movies?: MovieProps[] } =
+    useTrendingMoviesWeekForHeader();
 
   return (
     <Container className='my-25'>
