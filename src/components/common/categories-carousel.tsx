@@ -8,15 +8,7 @@ import { MoviesCategorysProps } from '@/types/movies';
 import { Progress } from '../ui/progress';
 import { Title } from './title';
 import { Container } from '../layout/container';
-
-type ApiProps = {
-  scrollPrev: () => void;
-  scrollNext: () => void;
-  selectedScrollSnap: () => number;
-  scrollSnapList: () => number[];
-  on: (event: string, callback: () => void) => void;
-  off: (event: string, callback: () => void) => void;
-};
+import { ApiProps } from '@/types/globals';
 
 type Props = {
   id?: string;
