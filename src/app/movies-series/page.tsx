@@ -10,17 +10,35 @@ export default function MoviesSeries() {
   const { allGenresMovies } = useAllGenresMovies();
   const { allCategorysMovies } = useAllCategorysMovies();
 
-  const { topRatedMovies } = allCategorysMovies;
+  const { topRatedMovies, nowPlayingMovies, popularMovies, upcomingMovies } =
+    allCategorysMovies;
 
   return (
     <main className='space-y-25'>
       <Header />
       <CardContainerMoviesSeries title='Filmes'>
-        <GenresCarousel genresMovies={allGenresMovies} title='Nossos gêneros' />
-        <CategorysCarousel
-          categorysMovies={topRatedMovies}
-          title='Mais votados'
-        />
+        <div className='space-y-25'>
+          <GenresCarousel
+            genresMovies={allGenresMovies}
+            title='Nossos gêneros'
+          />
+          <CategorysCarousel
+            categorysMovies={topRatedMovies}
+            title='Top Avaliados'
+          />
+          <CategorysCarousel
+            categorysMovies={popularMovies}
+            title='Populares'
+          />
+          <CategorysCarousel
+            categorysMovies={nowPlayingMovies}
+            title='Em cartaz'
+          />
+          <CategorysCarousel
+            categorysMovies={upcomingMovies}
+            title='Lançamentos futuros'
+          />
+        </div>
       </CardContainerMoviesSeries>
     </main>
   );
