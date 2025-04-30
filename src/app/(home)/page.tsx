@@ -7,6 +7,7 @@ import { useAllGenresMovies } from '@/hooks/use-movies';
 import { GenresMoviesProps } from '@/types/movies';
 import { FAQ } from './_components/faq';
 import { Pricing } from '@/components/layout/pricing';
+import { Container } from '@/components/layout/container';
 
 export default function Home() {
   const { allGenresMovies }: { allGenresMovies?: GenresMoviesProps[] } =
@@ -15,7 +16,15 @@ export default function Home() {
   return (
     <main className='space-y-25'>
       <Header />
-      <GenresCarousel id='categorys' genresMovies={allGenresMovies} />
+      <Container>
+        <GenresCarousel
+          id='categorys'
+          genresMovies={allGenresMovies}
+          title='Explore nossa grande variedade de filmes'
+          description='Se você está procurando uma comédia para fazer você rir, um drama
+              para fazer você pensar ou um documentário para aprender algo novo.'
+        />
+      </Container>
       <Devices id='devices' />
       <FAQ id='faq' />
       <Pricing id='pricing' />

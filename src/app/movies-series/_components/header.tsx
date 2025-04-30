@@ -13,10 +13,12 @@ import { MovieProps } from '@/types/movies';
 import { PlayIcon, StarIcon } from '@heroicons/react/24/solid';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { maskTwoDecimalPlaces, maskYear } from '@/lib/masks';
+import { maskTime, maskTwoDecimalPlaces, maskYear } from '@/lib/masks';
 
 export function Header() {
   const { allCategorysMovies, isLoading } = useAllCategorysMovies();
+
+  console.log(allCategorysMovies);
 
   const [isSelectedMovie, setIsSelectedMovie] = useState<MovieProps>(
     allCategorysMovies?.trendingMoviesAndSeries?.[2],
@@ -69,6 +71,13 @@ export function Header() {
                     '',
                 )}
               </p>
+
+              {isSelectedMovie?.media_type !== 'tv' && (
+                <p>
+                  <span className='pr-1'>|</span>{' '}
+                  {maskTime(isSelectedMovie?.runtime)}
+                </p>
+              )}
             </div>
             <p className='line-clamp-3'>{isSelectedMovie?.overview}</p>
           </div>

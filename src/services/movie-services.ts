@@ -29,6 +29,19 @@ export async function getMoviesByGenres(genreId: number) {
   return response.data.results;
 }
 
+export async function getMovieDetails(movieId: number) {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_TMDB_API_URL}/movie/${movieId}`,
+    {
+      params: {
+        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+        language: 'pt-BR',
+      },
+    },
+  );
+  return response.data;
+}
+
 export async function getTrendingMoviesWeek({ page = 1 }: { page?: number }) {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_TMDB_API_URL}/trending/all/week`,

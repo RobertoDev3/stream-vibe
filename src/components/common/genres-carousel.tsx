@@ -7,15 +7,21 @@ import { Card, CardContent } from '../ui/card';
 import { GenresMoviesProps } from '@/types/movies';
 import { Progress } from '../ui/progress';
 import { Title } from './title';
-import { Container } from '../layout/container';
 import { ApiProps } from '@/types/globals';
 
 type Props = {
   id?: string;
-  genresMovies?: GenresMoviesProps[];
+  genresMovies: GenresMoviesProps[] | undefined;
+  title: string;
+  description?: string;
 };
 
-export function GenresCarousel({ id, genresMovies }: Props) {
+export function GenresCarousel({
+  id,
+  genresMovies,
+  title,
+  description,
+}: Props) {
   const [api, setApi] = useState<ApiProps>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -43,13 +49,9 @@ export function GenresCarousel({ id, genresMovies }: Props) {
   }, [api]);
 
   return (
-    <Container id={id} className='space-y-10 lg:space-y-15'>
+    <div id={id} className='space-y-10 lg:space-y-15'>
       <div className='flex flex-col items-center justify-between gap-10 lg:flex-row lg:items-end lg:gap-20'>
-        <Title
-          title='Explore nossa grande variedade de filmes'
-          description='Se você está procurando uma comédia para fazer você rir, um drama
-              para fazer você pensar ou um documentário para aprender algo novo.'
-        />
+        <Title title={title} description={description} />
 
         <div className='hidden items-center gap-4 rounded-lg border border-[var(--black12)] bg-[var(--black06)] p-4 lg:flex'>
           <button
@@ -159,6 +161,6 @@ export function GenresCarousel({ id, genresMovies }: Props) {
           </button>
         </div>
       </div>
-    </Container>
+    </div>
   );
 }

@@ -6,11 +6,13 @@ import {
   getUpcomingMovies,
   getTopRatedMovies,
   getPopularMovies,
+  getMovieDetails,
 } from '@/services/movie-services';
 import {
   useAllCategorysMoviesStore,
   useTrendingMoviesWeekForHeaderStore,
 } from '@/store/movies-store';
+import { MovieProps } from '@/types/movies';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
@@ -36,6 +38,7 @@ export function useTrendingMoviesWeekForHeader() {
       return [...page1, ...page2, ...page3];
     },
     enabled: movies.length === 0,
+    staleTime: 1000 * 60 * 60 * 2, // Cache for 2 hours
   });
 
   useEffect(() => {
@@ -75,6 +78,7 @@ export function useAllGenresMovies() {
 
       return allGenresMovies;
     },
+    staleTime: 1000 * 60 * 60 * 2, // Cache for 2 hours
   });
 
   return {
@@ -95,20 +99,52 @@ export function useAllCategorysMovies() {
   } = useQuery({
     queryKey: ['all-categorys-movies'],
     queryFn: async () => {
-      const data = await Promise.all([
-        getTrendingMoviesWeek({ page: 1 }),
-        getNowPlayingMovies({ page: 1 }),
-        getPopularMovies({ page: 1 }),
-        getTopRatedMovies({ page: 1 }),
-        getUpcomingMovies({ page: 1 }),
+      const [trending, nowPlaying, popular, topRated, upcoming] =
+        await Promise.all([
+          getTrendingMoviesWeek({ page: 1 }),
+          getNowPlayingMovies({ page: 1 }),
+          getPopularMovies({ page: 1 }),
+          getTopRatedMovies({ page: 1 }),
+          getUpcomingMovies({ page: 1 }),
+        ]);
+
+      const fetchDetails = async (items: MovieProps[]) => {
+        const moviesLimited = items.slice(0, 10);
+
+        const details = await Promise.allSettled(
+          moviesLimited.map(item => {
+            if (item.media_type === 'tv') {
+              return Promise.resolve(item);
+            }
+            return getMovieDetails(item.id);
+          }),
+        );
+
+        return details
+          .filter(res => res.status === 'fulfilled')
+          .map(res => res.value);
+      };
+
+      const [
+        trendingDetailed,
+        nowPlayingDetailed,
+        popularDetailed,
+        topRatedDetailed,
+        upcomingDetailed,
+      ] = await Promise.all([
+        fetchDetails(trending),
+        fetchDetails(nowPlaying),
+        fetchDetails(popular),
+        fetchDetails(topRated),
+        fetchDetails(upcoming),
       ]);
 
       return {
-        trendingMoviesAndSeries: data[0],
-        nowPlayingMovies: data[1],
-        popularMovies: data[2],
-        topRatedMovies: data[3],
-        upcomingMovies: data[4],
+        trendingMoviesAndSeries: trendingDetailed,
+        nowPlayingMovies: nowPlayingDetailed,
+        popularMovies: popularDetailed,
+        topRatedMovies: topRatedDetailed,
+        upcomingMovies: upcomingDetailed,
       };
     },
     enabled:
@@ -117,6 +153,7 @@ export function useAllCategorysMovies() {
       movies.popularMovies.length === 0 &&
       movies.topRatedMovies.length === 0 &&
       movies.upcomingMovies.length === 0,
+    staleTime: 1000 * 60 * 60 * 2, // Cache for 2 hours
   });
 
   useEffect(() => {

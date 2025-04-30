@@ -25,3 +25,26 @@ export function maskTwoDecimalPlaces(value: number) {
 
   return value.toFixed(2);
 }
+
+export function maskTime(value: number) {
+  if (!value && value !== 0) return '';
+
+  const hours = Math.floor(value / 60);
+  const minutes = value % 60;
+
+  const hourText = hours === 1 ? '1 hora' : `${hours} horas`;
+  const minuteText =
+    minutes === 1
+      ? '1 minuto'
+      : `${minutes.toString().padStart(2, '0')} minutos`;
+
+  if (hours > 0 && minutes > 0) {
+    return `${hourText} ${minuteText}`;
+  } else if (hours > 0) {
+    return hourText;
+  } else if (minutes > 0) {
+    return minuteText;
+  }
+
+  return '';
+}
