@@ -24,10 +24,10 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { name: 'Home', path: '/' },
-  { name: 'Movies & Series', path: '/movies-series' },
-  { name: 'Support', path: '/support' },
-  { name: 'Subscriptions', path: '/subscriptions' },
+  { name: 'Início', path: '/' },
+  { name: 'Filmes & Séries', path: '/movies-series' },
+  { name: 'Suporte', path: '/support' },
+  { name: 'Assinaturas', path: '/subscriptions' },
 ];
 
 export function Nav() {
