@@ -109,10 +109,8 @@ export function useAllCategorysMovies() {
         ]);
 
       const fetchDetails = async (items: MovieProps[]) => {
-        const moviesLimited = items.slice(0, 10);
-
         const details = await Promise.allSettled(
-          moviesLimited.map(item => {
+          items.map(item => {
             if (item.media_type === 'tv') {
               return Promise.resolve(item);
             }
