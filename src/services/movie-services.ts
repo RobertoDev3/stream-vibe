@@ -34,7 +34,7 @@ export async function getMoviesHeader() {
   return combined;
 }
 
-export async function getListMoviesCategorys() {
+export async function getListMoviesGenres() {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_TMDB_API_URL}/genre/movie/list`,
     {
@@ -48,7 +48,7 @@ export async function getListMoviesCategorys() {
   return response.data.genres;
 }
 
-export async function getMoviesByCategory(genreId: number) {
+export async function getMoviesByGenres(genreId: number) {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_TMDB_API_URL}/discover/movie`,
     {
@@ -60,5 +60,18 @@ export async function getMoviesByCategory(genreId: number) {
     },
   );
 
+  return response.data.results;
+}
+
+export async function getNowPlayingMovies() {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_TMDB_API_URL}/movie/now_playing`,
+    {
+      params: {
+        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+        language: 'pt-BR',
+      },
+    },
+  );
   return response.data.results;
 }

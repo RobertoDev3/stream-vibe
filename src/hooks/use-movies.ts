@@ -1,7 +1,8 @@
 import {
-  getListMoviesCategorys,
-  getMoviesByCategory,
+  getListMoviesGenres,
+  getMoviesByGenres,
   getMoviesHeader,
+  getNowPlayingMovies,
 } from '@/services/movie-services';
 import { useMoviesStore } from '@/store/movies-store';
 import { useQuery } from '@tanstack/react-query';
@@ -28,19 +29,19 @@ export function useMoviesHeader() {
   };
 }
 
-export function useAllCategoriesMovies() {
+export function useAllGenresMovies() {
   const {
-    data: allCategoriesMovies,
+    data: allGenresMovies,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['categories-with-movies'],
+    queryKey: ['genres-with-movies'],
     queryFn: async () => {
-      const categories = await getListMoviesCategorys();
+      const categories = await getListMoviesGenres();
 
-      const allCategoriesMovies = await Promise.all(
+      const allGenresMovies = await Promise.all(
         categories.map(async (category: { id: number; name: string }) => {
-          const movies = await getMoviesByCategory(category.id);
+          const movies = await getMoviesByGenres(category.id);
 
           return {
             idCategory: category.id,
@@ -50,12 +51,25 @@ export function useAllCategoriesMovies() {
         }),
       );
 
-      return allCategoriesMovies;
+      return allGenresMovies;
     },
   });
 
   return {
-    allCategoriesMovies,
+    allGenresMovies,
+    isLoading,
+    error,
+  };
+}
+
+export function useAllCategorysMovies() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['all-categorys-movies'],
+    queryFn: getNowPlayingMovies,
+  });
+
+  return {
+    allCategorysMovies: data,
     isLoading,
     error,
   };
