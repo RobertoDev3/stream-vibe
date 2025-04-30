@@ -79,7 +79,7 @@ export function useAllGenresMovies() {
 export function useAllCategorysMovies() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['all-categorys-movies'],
-    queryFn: getNowPlayingMovies,
+    queryFn: () => getNowPlayingMovies({ page: 1 }),
   });
 
   return {

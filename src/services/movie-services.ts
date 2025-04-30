@@ -44,7 +44,7 @@ export async function getTrendingMoviesWeek({ page = 1 }: { page?: number }) {
   return response.data.results;
 }
 
-export async function getNowPlayingMovies({ page = 1 }: { page?: number }) {
+export async function getNowPlayingMovies({ page }: { page?: number }) {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_TMDB_API_URL}/movie/now_playing`,
     {
