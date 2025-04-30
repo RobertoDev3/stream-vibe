@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export async function getMoviesHeader() {
-  const [page1, page2] = await Promise.all([
+  const [page1, page2, page3] = await Promise.all([
     axios.get(`${process.env.NEXT_PUBLIC_TMDB_API_URL}/discover/movie`, {
       params: {
         api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
@@ -16,9 +16,20 @@ export async function getMoviesHeader() {
         page: 2,
       },
     }),
+    axios.get(`${process.env.NEXT_PUBLIC_TMDB_API_URL}/discover/movie`, {
+      params: {
+        api_key: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+        language: 'pt-BR',
+        page: 3,
+      },
+    }),
   ]);
 
-  const combined = [...page1.data.results, ...page2.data.results];
+  const combined = [
+    ...page1.data.results,
+    ...page2.data.results,
+    ...page3.data.results,
+  ];
 
   return combined;
 }
