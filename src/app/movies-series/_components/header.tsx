@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 import { maskTwoDecimalPlaces, maskYear } from '@/lib/masks';
 
 export function Header() {
-  const { allCategorysMovies } = useAllCategorysMovies();
+  const { allCategorysMovies, isLoading } = useAllCategorysMovies();
 
   const [isSelectedMovie, setIsSelectedMovie] = useState<MovieProps>(
     allCategorysMovies?.[2],
@@ -26,7 +26,13 @@ export function Header() {
     setIsSelectedMovie(allCategorysMovies?.[2]);
   }, [allCategorysMovies]);
 
-  console.log(isSelectedMovie);
+  if (isLoading) {
+    return (
+      <div className='flex h-dvh items-center justify-center'>
+        <p className='text-2xl font-semibold'>Carregando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className='relative flex h-[730px] flex-col space-y-10 overflow-hidden xl:h-dvh'>
