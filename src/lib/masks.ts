@@ -32,11 +32,8 @@ export function maskTime(value: number) {
   const hours = Math.floor(value / 60);
   const minutes = value % 60;
 
-  const hourText = hours === 1 ? '1 hora' : `${hours} horas`;
-  const minuteText =
-    minutes === 1
-      ? '1 minuto'
-      : `${minutes.toString().padStart(2, '0')} minutos`;
+  const hourText = `${hours} h`;
+  const minuteText = `${minutes.toString().padStart(2, '0')} min`;
 
   if (hours > 0 && minutes > 0) {
     return `${hourText} ${minuteText}`;
