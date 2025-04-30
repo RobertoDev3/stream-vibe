@@ -8,7 +8,7 @@ import { PlayIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 
 export function Header() {
-  const { allMovieList } = useAllCategorysMovies();
+  const { allCategorysMovies } = useAllCategorysMovies();
 
   return (
     <div>
@@ -34,7 +34,7 @@ export function Header() {
       </Container>
       <div>carrossel aqui</div>
       <div className='flex flex-wrap gap-4'>
-        {allMovieList?.map((movie: MovieProps) => (
+        {allCategorysMovies?.map((movie: MovieProps) => (
           <div key={movie.id} className='flex flex-col items-center'>
             <Image
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
