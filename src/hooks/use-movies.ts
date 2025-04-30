@@ -3,20 +3,26 @@ import {
   getMoviesByCategory,
   getMoviesHeader,
 } from '@/services/movie-services';
+import { useMoviesStore } from '@/store/movies-store';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 export function useMoviesHeader() {
-  const {
-    data: movies,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['movies'],
+  const zustandMovies = useMoviesStore(state => state.movies);
+  const setMovies = useMoviesStore(state => state.setMovies);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['movies-for-header'],
     queryFn: getMoviesHeader,
+    enabled: zustandMovies.length === 0,
   });
 
+  useEffect(() => {
+    if (data) setMovies(data);
+  }, [data, setMovies]);
+
   return {
-    movies,
+    movies: zustandMovies.length > 0 ? zustandMovies : data,
     isLoading,
     error,
   };
