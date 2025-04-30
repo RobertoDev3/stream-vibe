@@ -23,7 +23,7 @@ export default function Home() {
       />
       <Devices id='devices' />
       <FAQ id='faq' />
-      <Pricing />
+      <Pricing id='pricing' />
     </main>
   );
 }

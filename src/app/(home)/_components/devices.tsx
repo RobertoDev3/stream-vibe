@@ -52,7 +52,7 @@ const devices: DeviceProps[] = [
   },
 ];
 
-export function Devices({ id }: { id?: string }) {
+export function Devices({ id }: { id: string }) {
   return (
     <Container id={id} className='space-y-10 lg:space-y-15'>
       <Title

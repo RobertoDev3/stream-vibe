@@ -51,7 +51,7 @@ const faqData = [
   },
 ];
 
-export function FAQ({ id }: { id?: string }) {
+export function FAQ({ id }: { id: string }) {
   return (
     <Container id={id} className='space-y-[24px] lg:space-y-[44px]'>
       <Title
