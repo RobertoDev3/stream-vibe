@@ -37,7 +37,10 @@ const plans: PlanProps[] = [
 export function Pricing({ id }: { id: string }) {
   return (
     <Container id={id}>
-      <Tabs defaultValue='account' className='w-full space-y-10 lg:space-y-15'>
+      <Tabs
+        defaultValue='account'
+        className='flex w-full flex-col gap-y-10 lg:gap-y-15'
+      >
         <div className='flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-20'>
           <Title
             title='Escolha o plano certo para você'

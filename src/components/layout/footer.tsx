@@ -67,7 +67,7 @@ export function Footer() {
   };
 
   return (
-    <footer className='mt-25 bg-[var(--black06)]'>
+    <footer className='bg-[var(--black06)]'>
       <Container className='space-y-12.5 pt-12 pb-5 md:space-y-20 md:pt-20 md:pb-10'>
         <div className='grid grid-cols-2 gap-7.5 md:grid-cols-3 lg:grid-cols-6'>
           {siteMap.map((item, key) => (

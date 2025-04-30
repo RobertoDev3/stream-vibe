@@ -10,7 +10,7 @@ export function FreeTrial() {
   const { movies }: { movies?: MovieProps[] } = useMoviesHeader();
 
   return (
-    <Container>
+    <Container className='my-25'>
       <div className='relative flex items-center justify-center overflow-hidden rounded-lg border border-[var(--black15)] bg-[var(--black06)] px-15 py-20'>
         <div className='relative z-20 flex flex-col items-center gap-10 lg:flex-row lg:gap-20'>
           <Title
