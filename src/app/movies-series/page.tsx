@@ -40,6 +40,31 @@ export default function MoviesSeries() {
           />
         </div>
       </CardContainerMoviesSeries>
+
+      <CardContainerMoviesSeries title='Séries'>
+        <div className='space-y-25'>
+          <GenresCarousel
+            genresMovies={allGenresMovies}
+            title='Nossos gêneros'
+          />
+          <CategorysCarousel
+            categorysMovies={topRatedMovies}
+            title='Top Avaliados'
+          />
+          <CategorysCarousel
+            categorysMovies={popularMovies}
+            title='Populares'
+          />
+          <CategorysCarousel
+            categorysMovies={nowPlayingMovies}
+            title='Em cartaz'
+          />
+          <CategorysCarousel
+            categorysMovies={upcomingMovies}
+            title='Lançamentos futuros'
+          />
+        </div>
+      </CardContainerMoviesSeries>
     </main>
   );
 }

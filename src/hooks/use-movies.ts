@@ -88,6 +88,22 @@ export function useAllGenresMovies() {
   };
 }
 
+export function useTrendingMoviesWeek() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['trending-movies-week'],
+    queryFn: () => {
+      return getTrendingMoviesWeek({ page: 1 });
+    },
+    staleTime: 1000 * 60 * 60 * 2, // Cache for 2 hours
+  });
+
+  return {
+    TrendingMoviesWeek: data,
+    isLoading,
+    error,
+  };
+}
+
 export function useAllCategorysMovies() {
   const movies = useAllCategorysMoviesStore(state => state.movies);
   const setMovies = useAllCategorysMoviesStore(state => state.setMovies);
@@ -99,14 +115,12 @@ export function useAllCategorysMovies() {
   } = useQuery({
     queryKey: ['all-categorys-movies'],
     queryFn: async () => {
-      const [trending, nowPlaying, popular, topRated, upcoming] =
-        await Promise.all([
-          getTrendingMoviesWeek({ page: 1 }),
-          getNowPlayingMovies({ page: 1 }),
-          getPopularMovies({ page: 1 }),
-          getTopRatedMovies({ page: 1 }),
-          getUpcomingMovies({ page: 1 }),
-        ]);
+      const [nowPlaying, popular, topRated, upcoming] = await Promise.all([
+        getNowPlayingMovies({ page: 1 }),
+        getPopularMovies({ page: 1 }),
+        getTopRatedMovies({ page: 1 }),
+        getUpcomingMovies({ page: 1 }),
+      ]);
 
       const fetchDetails = async (items: MovieProps[]) => {
         const details = await Promise.allSettled(
@@ -124,13 +138,11 @@ export function useAllCategorysMovies() {
       };
 
       const [
-        trendingDetailed,
         nowPlayingDetailed,
         popularDetailed,
         topRatedDetailed,
         upcomingDetailed,
       ] = await Promise.all([
-        fetchDetails(trending),
         fetchDetails(nowPlaying),
         fetchDetails(popular),
         fetchDetails(topRated),
@@ -138,7 +150,6 @@ export function useAllCategorysMovies() {
       ]);
 
       return {
-        trendingMoviesAndSeries: trendingDetailed,
         nowPlayingMovies: nowPlayingDetailed,
         popularMovies: popularDetailed,
         topRatedMovies: topRatedDetailed,
@@ -146,7 +157,6 @@ export function useAllCategorysMovies() {
       };
     },
     enabled:
-      movies.trendingMoviesAndSeries.length === 0 &&
       movies.nowPlayingMovies.length === 0 &&
       movies.popularMovies.length === 0 &&
       movies.topRatedMovies.length === 0 &&
@@ -156,7 +166,6 @@ export function useAllCategorysMovies() {
 
   useEffect(() => {
     const isMoviesEmpty =
-      movies.trendingMoviesAndSeries.length === 0 &&
       movies.nowPlayingMovies.length === 0 &&
       movies.popularMovies.length === 0 &&
       movies.topRatedMovies.length === 0 &&

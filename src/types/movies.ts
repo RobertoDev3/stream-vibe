@@ -54,9 +54,9 @@ export type GenresMoviesProps = {
   nameCategory: string;
   movies: MovieProps[];
 };
+// trendingMoviesAndSeries: MovieProps[];
 
 export type AllCategorysMoviesProps = {
-  trendingMoviesAndSeries: MovieProps[];
   nowPlayingMovies: MovieProps[];
   popularMovies: MovieProps[];
   topRatedMovies: MovieProps[];

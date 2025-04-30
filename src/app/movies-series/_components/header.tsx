@@ -8,7 +8,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
-import { useAllCategorysMovies } from '@/hooks/use-movies';
+import { useTrendingMoviesWeek } from '@/hooks/use-movies';
 import { MovieProps } from '@/types/movies';
 import { PlayIcon, StarIcon } from '@heroicons/react/24/solid';
 import { useEffect, useState } from 'react';
@@ -16,15 +16,15 @@ import { cn } from '@/lib/utils';
 import { maskTime, maskTwoDecimalPlaces, maskYear } from '@/lib/masks';
 
 export function Header() {
-  const { allCategorysMovies, isLoading } = useAllCategorysMovies();
+  const { TrendingMoviesWeek, isLoading } = useTrendingMoviesWeek();
 
   const [isSelectedMovie, setIsSelectedMovie] = useState<MovieProps>(
-    allCategorysMovies?.trendingMoviesAndSeries?.[2],
+    TrendingMoviesWeek?.[2],
   );
 
   useEffect(() => {
-    setIsSelectedMovie(allCategorysMovies?.trendingMoviesAndSeries?.[2]);
-  }, [allCategorysMovies]);
+    setIsSelectedMovie(TrendingMoviesWeek?.[2]);
+  }, [TrendingMoviesWeek]);
 
   if (isLoading) {
     return (
@@ -97,31 +97,29 @@ export function Header() {
         }}
       >
         <CarouselContent className='flex h-[260px] items-end gap-3'>
-          {allCategorysMovies?.trendingMoviesAndSeries?.map(
-            (movie: MovieProps) => (
-              <CarouselItem key={movie.id} className='flex-none p-0'>
-                <Card
-                  className={cn(
-                    'transition-all duration-300 ease-in-out',
-                    isSelectedMovie === movie
-                      ? 'h-[260px] w-[176px]'
-                      : 'h-[208px] w-[140px]',
-                    'rounded-lg border-none bg-cover bg-center p-0 text-center text-white',
-                  )}
-                  style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`,
-                  }}
+          {TrendingMoviesWeek?.map((movie: MovieProps) => (
+            <CarouselItem key={movie.id} className='flex-none p-0'>
+              <Card
+                className={cn(
+                  'transition-all duration-300 ease-in-out',
+                  isSelectedMovie === movie
+                    ? 'h-[260px] w-[176px]'
+                    : 'h-[208px] w-[140px]',
+                  'rounded-lg border-none bg-cover bg-center p-0 text-center text-white',
+                )}
+                style={{
+                  backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`,
+                }}
+              >
+                <button
+                  className='h-full w-full cursor-pointer'
+                  onClick={() => setIsSelectedMovie(movie)}
                 >
-                  <button
-                    className='h-full w-full cursor-pointer'
-                    onClick={() => setIsSelectedMovie(movie)}
-                  >
-                    <p className='hidden'>{movie.title || movie.name}</p>
-                  </button>
-                </Card>
-              </CarouselItem>
-            ),
-          )}
+                  <p className='hidden'>{movie.title || movie.name}</p>
+                </button>
+              </Card>
+            </CarouselItem>
+          ))}
         </CarouselContent>
       </Carousel>
     </div>
