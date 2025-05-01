@@ -18,8 +18,6 @@ import { maskTime, maskTwoDecimalPlaces, maskYear } from '@/lib/masks';
 export function Header() {
   const { trendingMoviesWeek, isLoading } = useTrendingMoviesWeek();
 
-  console.log(trendingMoviesWeek);
-
   const [isSelectedMovie, setIsSelectedMovie] = useState<MovieProps>(
     trendingMoviesWeek?.[2],
   );
