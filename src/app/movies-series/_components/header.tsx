@@ -16,15 +16,17 @@ import { cn } from '@/lib/utils';
 import { maskTime, maskTwoDecimalPlaces, maskYear } from '@/lib/masks';
 
 export function Header() {
-  const { TrendingMoviesWeek, isLoading } = useTrendingMoviesWeek();
+  const { trendingMoviesWeek, isLoading } = useTrendingMoviesWeek();
+
+  console.log(trendingMoviesWeek);
 
   const [isSelectedMovie, setIsSelectedMovie] = useState<MovieProps>(
-    TrendingMoviesWeek?.[2],
+    trendingMoviesWeek?.[2],
   );
 
   useEffect(() => {
-    setIsSelectedMovie(TrendingMoviesWeek?.[2]);
-  }, [TrendingMoviesWeek]);
+    setIsSelectedMovie(trendingMoviesWeek?.[2]);
+  }, [trendingMoviesWeek]);
 
   if (isLoading) {
     return (
@@ -97,7 +99,7 @@ export function Header() {
         }}
       >
         <CarouselContent className='flex h-[260px] items-end gap-3'>
-          {TrendingMoviesWeek?.map((movie: MovieProps) => (
+          {trendingMoviesWeek?.map((movie: MovieProps) => (
             <CarouselItem key={movie.id} className='flex-none p-0'>
               <Card
                 className={cn(

@@ -91,14 +91,27 @@ export function useAllGenresMovies() {
 export function useTrendingMoviesWeek() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['trending-movies-week'],
-    queryFn: () => {
-      return getTrendingMoviesWeek({ page: 1 });
+    queryFn: async () => {
+      const movies: MovieProps[] = await getTrendingMoviesWeek({ page: 1 });
+
+      const detailedMovies = await Promise.allSettled(
+        movies.map(movie => {
+          if (movie.media_type === 'tv') {
+            return Promise.resolve(movie);
+          }
+          return getMovieDetails(movie.id);
+        }),
+      );
+
+      return detailedMovies
+        .filter(res => res.status === 'fulfilled')
+        .map(res => res.value);
     },
     staleTime: 1000 * 60 * 60 * 2, // Cache for 2 hours
   });
 
   return {
-    TrendingMoviesWeek: data,
+    trendingMoviesWeek: data,
     isLoading,
     error,
   };
@@ -124,12 +137,7 @@ export function useAllCategorysMovies() {
 
       const fetchDetails = async (items: MovieProps[]) => {
         const details = await Promise.allSettled(
-          items.map(item => {
-            if (item.media_type === 'tv') {
-              return Promise.resolve(item);
-            }
-            return getMovieDetails(item.id);
-          }),
+          items.map(item => getMovieDetails(item.id)),
         );
 
         return details
