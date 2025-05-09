@@ -1,4 +1,4 @@
-# StreamVibe 🎬
+# StreamVibe 🎬 (Projeto em desenvolvimento)
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.3.1-black?logo=nextdotjs&style=for-the-badge)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38BDF8?logo=tailwindcss&logoColor=white&style=for-the-badge)
