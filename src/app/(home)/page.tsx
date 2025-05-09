@@ -8,10 +8,18 @@ import { GenresMoviesProps } from '@/types/movies';
 import { FAQ } from './_components/faq';
 import { Pricing } from '@/components/layout/pricing';
 import { Container } from '@/components/layout/container';
+import Loading from '../loading';
 
 export default function Home() {
-  const { allGenresMovies }: { allGenresMovies?: GenresMoviesProps[] } =
+  const {
+    allGenresMovies,
+    isLoading,
+  }: { allGenresMovies?: GenresMoviesProps[]; isLoading: boolean } =
     useAllGenresMovies();
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <main className='space-y-25'>

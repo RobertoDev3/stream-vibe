@@ -14,6 +14,7 @@ import { PlayIcon, StarIcon } from '@heroicons/react/24/solid';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { maskTime, maskTwoDecimalPlaces, maskYear } from '@/lib/masks';
+import Loading from '@/app/loading';
 
 export function Header() {
   const { trendingMoviesWeek, isLoading } = useTrendingMoviesWeek();
@@ -27,11 +28,7 @@ export function Header() {
   }, [trendingMoviesWeek]);
 
   if (isLoading) {
-    return (
-      <div className='flex h-dvh items-center justify-center'>
-        <p className='text-2xl font-semibold'>Carregando...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
