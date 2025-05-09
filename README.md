@@ -25,8 +25,6 @@
 
 O **StreamVibe** é um projeto front‑end que simula o catálogo de um serviço de streaming. O objetivo é praticar gerenciamento de estado global com **Zustand**, cache de requisições com **TanStack Query**, **Axios** e UI 100 % acessível.
 
-![screenshot](/public/screenshots/landing.png) <!-- troque pelo caminho correto -->
-
 ## Principais Funcionalidades
 
 - 🎞️ **Carrossel hero** com filmes/series em alta na semana
@@ -84,7 +82,7 @@ Crie um arquivo `.env` na raiz seguindo o exemplo abaixo:
 
 ```dotenv
 # Chave da API do TMDB – obtenha no seu dashboard
-NEXT_PUBLIC_TMDB_API_KEY=
+NEXT_PUBLIC_TMDB_API_KEY=sua_chave_aqui
 
 # URL base da API
 NEXT_PUBLIC_TMDB_API_URL=https://api.themoviedb.org/3
