@@ -7,7 +7,7 @@
 
 > Interface moderna de streaming construída com **Next.js 15** e **Tailwind CSS 4**, consumindo a [TMDB API](https://www.themoviedb.org/documentation/api) para exibir filmes em alta.
 
-[Live demo](https://streamvibe.vercel.app)
+[Live demo](https://stream-vibe-five.vercel.app)
 
 ---
 
