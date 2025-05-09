@@ -1,34 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StreamVibe 🎬
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-15.3.1-black?logo=nextdotjs&style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38BDF8?logo=tailwindcss&logoColor=white&style=for-the-badge)
+![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000?logo=vercel&style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-First, run the development server:
+> Interface moderna de streaming construída com **Next.js 15** e **Tailwind CSS 4**, consumindo a [TMDB API](https://www.themoviedb.org/documentation/api) para exibir filmes em alta.
+
+[Live demo](https://streamvibe.vercel.app)
+
+---
+
+## 📑 Índice
+
+- [Visão Geral](#visão-geral)
+- [Principais Funcionalidades](#principais-funcionalidades)
+- [Tecnologias & Ferramentas](#tecnologias--ferramentas)
+- [Instalação](#instalação)
+- [Scripts disponíveis](#scripts-disponíveis)
+- [Variáveis de Ambiente](#variáveis-de-ambiente)
+- [Licença](#licença)
+
+## Visão Geral
+
+O **StreamVibe** é um projeto front‑end que simula o catálogo de um serviço de streaming. O objetivo é praticar gerenciamento de estado global com **Zustand**, cache de requisições com **TanStack Query**, **Axios** e UI 100 % acessível.
+
+![screenshot](/public/screenshots/landing.png) <!-- troque pelo caminho correto -->
+
+## Principais Funcionalidades
+
+- 🎞️ **Carrossel hero** com filmes/series em alta na semana
+- 📂 **Seções por categoria** (Em Cartaz, Populares, Mais Bem Avaliados, Próximos Lançamentos)
+- 🔍 **Busca instantânea** de títulos _(em desenvolvimento)_
+- ⚡ **Pré‑fetch** e **cache** de requisições (React Query)
+- 🗄 **Cache local** para melhor performance
+- 📱 **Design responsivo** mobile‑first
+- ♿ **Acessibilidade** respeitando WAI‑ARIA
+- 🚀 **Deploy 1‑click** na Vercel
+
+## Tecnologias & Ferramentas
+
+| Categoria          | Stack                                              |
+| ------------------ | -------------------------------------------------- |
+| **Core**           | Next.js 15 (App Router, Server Actions, Turbopack) |
+| **Linguagens**     | TypeScript 5, JavaScript ES2023                    |
+| **Estilo**         | Tailwind CSS 4, Prettier + eslint‑config‑prettier  |
+| **UI**             | Heroicons, Embla Carousel                          |
+| **Estado & Dados** | TanStack Query v5, Zustand v5, Axios               |
+| **Outros**         | clsx, sonner (toasts)                              |
+| **CI/CD**          | GitHub, Vercel                                     |
+
+## Instalação
+
+> Requer **Node.js >= 20** e **Yarn >= 1.22**.
 
 ```bash
-npm run dev
-# or
+# Clone o repositório
+git clone https://github.com/RobertoDev3/stream-vibe.git
+cd stream-vibe
+
+# Instale as dependências
+yarn
+
+# Inicie o servidor de desenvolvimento
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação estará disponível em **[http://localhost:3000](http://localhost:3000)**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts disponíveis
 
-## Learn More
+| Comando       | Descrição                                          |
+| ------------- | -------------------------------------------------- |
+| `yarn dev`    | Inicia o ambiente de desenvolvimento com Turbopack |
+| `yarn build`  | Compila o projeto para produção                    |
+| `yarn start`  | Sobe o servidor Next.js já compilado               |
+| `yarn lint`   | Executa o ESLint                                   |
+| `yarn format` | Formata todos os arquivos com Prettier             |
 
-To learn more about Next.js, take a look at the following resources:
+## Variáveis de Ambiente
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Crie um arquivo `.env` na raiz seguindo o exemplo abaixo:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```dotenv
+# Chave da API do TMDB – obtenha no seu dashboard
+NEXT_PUBLIC_TMDB_API_KEY=
 
-## Deploy on Vercel
+# URL base da API
+NEXT_PUBLIC_TMDB_API_URL=https://api.themoviedb.org/3
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Licença
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Distribuído sob a licença **MIT**. Veja [`LICENSE`](LICENSE) para mais detalhes.
