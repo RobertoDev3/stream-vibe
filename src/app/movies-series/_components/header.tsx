@@ -32,7 +32,7 @@ export function Header() {
   }
 
   return (
-    <div className='relative flex h-[730px] flex-col space-y-10 overflow-hidden xl:h-dvh'>
+    <div className='relative flex h-full flex-col space-y-10 overflow-hidden xl:min-h-[739px]'>
       <div
         className='absolute top-0 left-0 h-full w-full bg-cover bg-center'
         style={{
@@ -42,7 +42,7 @@ export function Header() {
 
       <div className='absolute h-full w-full bg-gradient-to-r from-black from-30% to-transparent to-160% opacity-80' />
 
-      <Container className='relative z-10 flex-1 space-y-10 pb-5 xl:pt-[130px] 2xl:pb-20'>
+      <Container className='relative z-10 flex-1 space-y-10 pt-30 pb-5'>
         <div className='flex h-full max-w-[600px] flex-col justify-end space-y-10'>
           <div className='space-y-4'>
             <h2 className='text-4xl font-semibold md:text-6xl'>
